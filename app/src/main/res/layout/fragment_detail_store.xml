@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.DetailCoupon">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fries_shop"
+            android:paddingBottom="5dp"/>
+
+
+        <TextView
+            android:id="@+id/txtTitleStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Frituur Nadine!"
+            android:textSize="40dp"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/txtSloganStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Beste frieten vant stad!"
+            android:textSize="30dp"
+            android:gravity="right"
+            android:paddingBottom="5dp"/>
+
+        <TextView
+            android:id="@+id/txtSummaryDetailCoupon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Basically, Dao argues that FILL_PARENT is a clunkier version of MATCH_PARENT used for the same purposes, but with more room for confusion, because FILL_PARENT doesn't actually do what its name implies. On top of that, FILL_PARENT is deprecated, so at some point it will no longer be supported. According to Dao, the reason both exist is a kind of ineffective attempt at clearing up developer confusing"
+            android:paddingBottom="5dp"/>
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
