@@ -4,7 +4,7 @@
     <string name="app_name">Kupon</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Kupon</string>
     <string name="title_fragment_category">Category</string>
     <string name="title_fragment_coupons">Coupons</string>
     <string name="title_fragment_stores">Stores</string>

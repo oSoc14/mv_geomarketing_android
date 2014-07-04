@@ -13,7 +13,10 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+
 import osoc14.okfn.geomarketing.ListAdapters.CouponListAdapter;
+import osoc14.okfn.geomarketing.MyGoogleMapHelper;
 import osoc14.okfn.geomarketing.R;
 
 import osoc14.okfn.geomarketing.activities.CouponDetailActivity;
@@ -48,6 +51,8 @@ public class CouponsFragment extends Fragment {
     private AbsListView mListView;
     private CouponListAdapter myCustomAdapter;
 
+    private MyGoogleMapHelper googleMapHelper;
+
     // TODO: Rename and change types of parameters
     public static CouponsFragment newInstance(/*String param1, String param2*/) {
         CouponsFragment fragment = new CouponsFragment();
@@ -65,6 +70,16 @@ public class CouponsFragment extends Fragment {
     public CouponsFragment() {
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        googleMapHelper.initializeMap();
+        googleMapHelper.zoomMap();
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +87,16 @@ public class CouponsFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+
+        googleMapHelper = new MyGoogleMapHelper(this);
+
+        try {
+            googleMapHelper.initializeMap();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         // TODO: Change Adapter to display your content

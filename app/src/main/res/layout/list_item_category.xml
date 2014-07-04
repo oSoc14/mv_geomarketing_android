@@ -13,7 +13,6 @@
         android:layout_marginBottom="2dp"
         android:background="@drawable/card_background" >
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,8 +30,6 @@
             android:layout_alignParentEnd="true"
             android:background="#ffffffff"
             android:src="@android:drawable/ic_media_play"/>
-
-
 
     </RelativeLayout>
 

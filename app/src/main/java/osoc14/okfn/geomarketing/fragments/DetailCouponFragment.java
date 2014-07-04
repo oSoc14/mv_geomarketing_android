@@ -2,12 +2,15 @@ package osoc14.okfn.geomarketing.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +18,12 @@ import android.widget.Toast;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.encoder.QRCode;
 
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.database.CouponItem;
@@ -40,8 +49,6 @@ public class DetailCouponFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    private GoogleMap googleMap;
 
     /**
      * Use this factory method to create a new instance of
@@ -72,28 +79,10 @@ public class DetailCouponFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        try {
-            initGoogleMap();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initGoogleMap(){
-        if (googleMap == null) {
-            googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-                    R.id.map)).getMap();
-
-            // check if map is created successfully or not
-            if (googleMap == null) {
-                Toast.makeText(getActivity(),
-                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
-                        .show();
-            }
-        }
 
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -122,6 +111,45 @@ public class DetailCouponFragment extends Fragment {
 
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewDetailCoupon);
         imageView.setImageResource(currentCoupon.resourceIdPicture);
+
+        ImageView imageViewQRCode = (ImageView) view.findViewById(R.id.imageViewQRCode);
+
+        QRCodeWriter writer = new QRCodeWriter();
+
+        try {
+
+
+            int matrixWidth = 300;
+
+            BitMatrix matrix = writer.encode("still hard coded dummy code", BarcodeFormat.QR_CODE, matrixWidth, matrixWidth);
+            Bitmap mBitmap = Bitmap.createBitmap(matrixWidth, matrixWidth, Bitmap.Config.ARGB_8888);
+
+            for (int i = 0; i < matrixWidth; i++) {
+                for (int j = 0; j < matrixWidth; j++) {
+                    mBitmap.setPixel(i, j, matrix.get(i, j) ? R.drawable.purple: Color.WHITE);
+                }
+            }
+
+            imageViewQRCode.setImageBitmap(mBitmap);
+            
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+
+
+        Button bttnStartNavigation = (Button) view.findViewById(R.id.bttnStartNavigation);
+        bttnStartNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LatLng destination = new LatLng(51.04224998071354,3.7289692461490627);
+
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + destination.latitude+","+destination.longitude));
+                startActivity(i); // misschien de ";" die het probleem is?
+
+            }
+        });
 
         return view;
     }

@@ -1,5 +1,7 @@
 package osoc14.okfn.geomarketing.database;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import osoc14.okfn.geomarketing.R;
 
 /**
@@ -14,6 +16,8 @@ public class FakeDatabase {
     StoreItem[] storeItemData;
 
     CategoryItem[] categoryItemData;
+
+    LatLng [] locations;
 
     public FakeDatabase(){
 
@@ -50,8 +54,13 @@ public class FakeDatabase {
 
         //
 
+        locations = new LatLng[5];
 
-
+        locations[0] = new LatLng(51.041377455114635,3.7252557277679443);
+        locations[1] = new LatLng(51.04075809742324,3.7268670648336415);
+        locations[2] = new LatLng(51.03956383942572,3.7260090932250023);
+        locations[3] = new LatLng(51.04240386731209,3.721863068640232);
+        locations[4] = new LatLng(51.04224998071354,3.7289692461490627);
     }
 
     public CouponItem[] getCouponItemData() {
@@ -64,5 +73,9 @@ public class FakeDatabase {
 
     public CategoryItem[] getCategoryItemData() {
         return  categoryItemData;
+    }
+
+    public LatLng[] getLocations() {
+        return locations;
     }
 }
