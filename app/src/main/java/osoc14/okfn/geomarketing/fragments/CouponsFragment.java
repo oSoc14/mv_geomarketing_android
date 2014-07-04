@@ -12,12 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import osoc14.okfn.geomarketing.CouponListAdapter;
+import osoc14.okfn.geomarketing.database.CouponItem;
 import osoc14.okfn.geomarketing.R;
 
-import osoc14.okfn.geomarketing.activities.DetailActivity;
-import osoc14.okfn.geomarketing.fragments.dummy.DummyContent;
+import osoc14.okfn.geomarketing.activities.CouponDetailActivity;
+import osoc14.okfn.geomarketing.database.FakeDatabase;
+import osoc14.okfn.geomarketing.database.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -51,6 +53,7 @@ public class CouponsFragment extends Fragment implements AbsListView.OnItemClick
      * Views.
      */
     private ListAdapter mAdapter;
+    private CouponListAdapter myCustomAdapter;
 
     // TODO: Rename and change types of parameters
     public static CouponsFragment newInstance(/*String param1, String param2*/) {
@@ -83,8 +86,15 @@ public class CouponsFragment extends Fragment implements AbsListView.OnItemClick
         mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
                 android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
         */
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.list_item_coupon, R.id.txtTitleCoupon, DummyContent.ITEMS);
+        /*
+        mAdapter = new ArrayAdapter<DummyContent.DummyCoupon>(getActivity(),
+                R.layout.list_item_coupon, R.id.txtTitleCoupon, DummyContent.COUPONS);
+        */
+
+        FakeDatabase fd = new FakeDatabase();
+        myCustomAdapter = new CouponListAdapter(getActivity(), R.layout.list_item_coupon, fd.getCouponItemData());
+
+
 
     }
 
@@ -93,9 +103,13 @@ public class CouponsFragment extends Fragment implements AbsListView.OnItemClick
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_couponsfragment, container, false);
 
+
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+
+        //My custom adaptor
+        ((AdapterView<ListAdapter>) mListView).setAdapter(myCustomAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
@@ -126,13 +140,11 @@ public class CouponsFragment extends Fragment implements AbsListView.OnItemClick
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(DummyContent.COUPONS.get(position).id);
 
-            Toast.makeText(getActivity(), "we zijn goe bezig", Toast.LENGTH_SHORT).show();
-
-            Intent in = new Intent(getActivity(), DetailActivity.class);
+            Intent in = new Intent(getActivity(), CouponDetailActivity.class);
+            in.putExtra("object_number", position );
             startActivity(in);
-
 
         }
     }

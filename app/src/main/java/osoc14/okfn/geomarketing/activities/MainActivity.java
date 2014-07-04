@@ -17,10 +17,11 @@ import android.widget.Toast;
 
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.fragments.AccountFragment;
+import osoc14.okfn.geomarketing.fragments.CategoryFragment;
 import osoc14.okfn.geomarketing.fragments.CouponsFragment;
 import osoc14.okfn.geomarketing.fragments.StoresFragment;
 
-public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener{
+public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener, CategoryFragment.OnFragmentInteractionListener {
 
     /**
      *  Listener for CouponsFragment and StoresFragment
@@ -148,13 +149,12 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             //return MyPlaceholderFragment.newInstance(position + 1);
             switch (position) {
                 case 0:
-                    Toast.makeText(getBaseContext(), "fragment 1", Toast.LENGTH_SHORT).show();
-                    return CouponsFragment.newInstance();
+                    return CategoryFragment.newInstance("a", "b");
                 case 1:
-                    Toast.makeText(getBaseContext(), "fragment 2", Toast.LENGTH_SHORT).show();
-                    return StoresFragment.newInstance("a", "b");
+                    return CouponsFragment.newInstance();
                 case 2:
-                    Toast.makeText(getBaseContext(), "fragment 3", Toast.LENGTH_SHORT).show();
+                    return StoresFragment.newInstance("a", "b");
+                case 3:
                     return AccountFragment.newInstance("a","b");
             }
             return null;
@@ -165,7 +165,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -173,11 +173,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_fragment_coupons).toUpperCase(l);
+                    return getString(R.string.title_fragment_category).toUpperCase(l);
                 case 1:
-                    return getString(R.string.title_fragment_stores).toUpperCase(l);
+                    return getString(R.string.title_fragment_coupons).toUpperCase(l);
                 case 2:
-                    return getString(R.string.title_fragment_account).toUpperCase(l);
+                    return getString(R.string.title_fragment_stores).toUpperCase(l);
             }
             return null;
         }

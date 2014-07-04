@@ -19,18 +19,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DashboardActivity"
-            android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".activities.DetailActivity"
+            android:name=".activities.CouponDetailActivity"
             android:label="@string/title_activity_coupon" >
         </activity>
+        <activity
+            android:name=".activities.StoreDetailActivity" />
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package osoc14.okfn.geomarketing.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,9 +12,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import osoc14.okfn.geomarketing.CouponListAdapter;
 import osoc14.okfn.geomarketing.R;
 
-import osoc14.okfn.geomarketing.fragments.dummy.DummyContent;
+import osoc14.okfn.geomarketing.StoreListAdapter;
+import osoc14.okfn.geomarketing.activities.StoreDetailActivity;
+import osoc14.okfn.geomarketing.database.FakeDatabase;
+import osoc14.okfn.geomarketing.database.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -21,7 +27,7 @@ import osoc14.okfn.geomarketing.fragments.dummy.DummyContent;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
+ * Activities containing this fragment MUST implement the
  * interface.
  */
 public class StoresFragment extends Fragment implements AbsListView.OnItemClickListener {
@@ -47,6 +53,7 @@ public class StoresFragment extends Fragment implements AbsListView.OnItemClickL
      * Views.
      */
     private ListAdapter mAdapter;
+    private StoreListAdapter myCustomAdapter;
 
     // TODO: Rename and change types of parameters
     public static StoresFragment newInstance(String param1, String param2) {
@@ -75,8 +82,11 @@ public class StoresFragment extends Fragment implements AbsListView.OnItemClickL
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                R.layout.list_item_store, R.id.txtStoreStore, DummyContent.ITEMS);
+        mAdapter = new ArrayAdapter<DummyContent.DummyStore>(getActivity(),
+                R.layout.list_item_store, R.id.txtTitleStore, DummyContent.STORES);
+
+        FakeDatabase fd = new FakeDatabase();
+        myCustomAdapter = new StoreListAdapter(getActivity(), R.layout.list_item_store, fd.getStoreItemData());
     }
 
     @Override
@@ -88,6 +98,7 @@ public class StoresFragment extends Fragment implements AbsListView.OnItemClickL
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
 
+        ((AdapterView<ListAdapter>) mListView).setAdapter(myCustomAdapter);
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
 
@@ -117,7 +128,10 @@ public class StoresFragment extends Fragment implements AbsListView.OnItemClickL
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            mListener.onFragmentInteraction(DummyContent.STORES.get(position).id);
+
+            Intent in = new Intent(getActivity(), StoreDetailActivity.class);
+            startActivity(in);
         }
     }
 

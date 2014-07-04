@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingBottom="5dp"
     android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/card_background" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fries_shop"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/imageView"
-            android:paddingRight="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="coupon title"
-            android:textSize="40dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imageView"
             android:id="@+id/txtTitleStore" />
 
-        <TextView
+
+
+        <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
-            android:id="@+id/txtStoreStore"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignBottom="@+id/imageView"
+            android:text="Get notified!"
+            android:id="@+id/checkBox"
+            android:layout_below="@+id/txtTitleStore"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -46,4 +38,4 @@
     </RelativeLayout>
 
 
-</LinearLayout>
+</FrameLayout>
