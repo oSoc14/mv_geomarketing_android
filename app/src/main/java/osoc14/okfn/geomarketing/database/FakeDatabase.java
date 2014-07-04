@@ -13,6 +13,8 @@ public class FakeDatabase {
 
     StoreItem[] storeItemData;
 
+    CategoryItem[] categoryItemData;
+
     public FakeDatabase(){
 
         //Set coupon data
@@ -38,6 +40,14 @@ public class FakeDatabase {
         storeItemData[4] = new StoreItem("5", "Slager bart", "Slager Bart", "summary", R.drawable.butcher, false);
         storeItemData[5] = new StoreItem("5", "h&m", "h&m", "summary", R.drawable.hm, false);
 
+        //Set Category dummy data
+        categoryItemData = new CategoryItem[4];
+        categoryItemData[0] = new CategoryItem("1", "Kledij", R.drawable.hm);
+        categoryItemData[1] = new CategoryItem("2", "Voeding", R.drawable.hm);
+        categoryItemData[2] = new CategoryItem("3", "Cafees", R.drawable.hm);
+        categoryItemData[3] = new CategoryItem("4", "Restaurant", R.drawable.hm);
+
+
         //
 
 
@@ -50,5 +60,9 @@ public class FakeDatabase {
 
     public StoreItem[] getStoreItemData() {
         return storeItemData;
+    }
+
+    public CategoryItem[] getCategoryItemData() {
+        return  categoryItemData;
     }
 }

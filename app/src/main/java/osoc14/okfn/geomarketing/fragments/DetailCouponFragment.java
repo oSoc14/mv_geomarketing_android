@@ -1,14 +1,24 @@
 package osoc14.okfn.geomarketing.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 
 import osoc14.okfn.geomarketing.R;
+import osoc14.okfn.geomarketing.database.CouponItem;
+import osoc14.okfn.geomarketing.database.FakeDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,6 +40,8 @@ public class DetailCouponFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private GoogleMap googleMap;
 
     /**
      * Use this factory method to create a new instance of
@@ -59,13 +71,59 @@ public class DetailCouponFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        try {
+            initGoogleMap();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initGoogleMap(){
+        if (googleMap == null) {
+            googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                    R.id.map)).getMap();
+
+            // check if map is created successfully or not
+            if (googleMap == null) {
+                Toast.makeText(getActivity(),
+                        "Sorry! unable to create maps", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_coupon, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_detail_coupon, container, false);
+
+        Intent intent = getActivity().getIntent();
+        int number = intent.getIntExtra("object_number", 1);
+
+        FakeDatabase fd = new FakeDatabase();
+        CouponItem[] coupons =  fd.getCouponItemData();
+
+        CouponItem currentCoupon = coupons[number];
+
+        TextView txtViewTitle = (TextView) view.findViewById(R.id.txtTitleDetailCoupon);
+        txtViewTitle.setText(currentCoupon.title);
+
+        int resultcode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
+
+        Toast.makeText(getActivity(), "available code" + Integer.toString(resultcode), Toast.LENGTH_SHORT).show();
+
+        TextView txtViewStoreTitle = (TextView) view.findViewById(R.id.txtStoreDetailCoupon);
+        txtViewStoreTitle.setText(currentCoupon.store);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.imageViewDetailCoupon);
+        imageView.setImageResource(currentCoupon.resourceIdPicture);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

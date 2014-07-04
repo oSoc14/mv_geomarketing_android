@@ -13,10 +13,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import osoc14.okfn.geomarketing.CouponListAdapter;
 import osoc14.okfn.geomarketing.R;
 
-import osoc14.okfn.geomarketing.StoreListAdapter;
+import osoc14.okfn.geomarketing.ListAdapters.StoreListAdapter;
 import osoc14.okfn.geomarketing.activities.StoreDetailActivity;
 import osoc14.okfn.geomarketing.database.FakeDatabase;
 import osoc14.okfn.geomarketing.database.dummy.DummyContent;

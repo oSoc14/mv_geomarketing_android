@@ -93,6 +93,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
                     actionBar.newTab()
                             .setText(mSectionsPagerAdapter.getPageTitle(i))
                             .setTabListener(this));
+            actionBar.setTitle(R.string.app_name);
         }
     }
 
@@ -129,6 +130,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    public void setFragment(int position) {
+       mViewPager.setCurrentItem(position);
     }
 
     /**

@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 20
-    buildToolsVersion "20.0.0"
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "osoc14.okfn.geomarketing"
@@ -32,6 +32,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.3.2'
     // You must install or update the Support Repository through the SDK manager to use this dependency.
     compile 'com.android.support:support-v13:19.+'
+    compile 'com.google.android.gms:play-services:+'
 }
 
 

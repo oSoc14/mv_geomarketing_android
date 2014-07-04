@@ -1,6 +1,8 @@
 package osoc14.okfn.geomarketing.fragments;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.Toast;
 
-import osoc14.okfn.geomarketing.CategoryListAdapter;
-import osoc14.okfn.geomarketing.CouponListAdapter;
+import osoc14.okfn.geomarketing.ListAdapters.CategoryListAdapter;
 import osoc14.okfn.geomarketing.R;
+import osoc14.okfn.geomarketing.activities.CouponDetailActivity;
+import osoc14.okfn.geomarketing.activities.MainActivity;
 import osoc14.okfn.geomarketing.database.FakeDatabase;
 
 /**
@@ -35,7 +40,7 @@ public class CategoryFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private AbsListView mListView;
-    private CategoryListAdapter myCustomAdapter;
+    private CategoryListAdapter myCategoryAdapter;
 
     /**
      * Use this factory method to create a new instance of
@@ -67,7 +72,7 @@ public class CategoryFragment extends Fragment {
         }
 
         FakeDatabase fd = new FakeDatabase();
-        myCustomAdapter = new CategoryListAdapter(getActivity(), R.layout.list_item_category, fd.getCouponItemData());
+        myCategoryAdapter = new CategoryListAdapter(getActivity(), R.layout.list_item_category, fd.getCategoryItemData());
     }
 
     @Override
@@ -77,7 +82,23 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
 
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        mListView.setAdapter(myCustomAdapter);
+        mListView.setAdapter(myCategoryAdapter);
+        mListView.setOnItemClickListener(
+            new AbsListView.OnItemClickListener() {
+                 @Override
+                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+                        ((MainActivity) getActivity()).setFragment(1);
+/*
+                       Intent in = new Intent(getActivity(), CouponsFragment.class);
+                       in.putExtra("category_number", i );
+                       Toast.makeText(getActivity(), "ojo category" + i, Toast.LENGTH_SHORT).show();
+                       startActivity(in);*/
+                 }
+            }
+
+        );
 
 
         return view;
@@ -106,6 +127,10 @@ public class CategoryFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
+
+
 
     /**
      * This interface must be implemented by activities that contain this
