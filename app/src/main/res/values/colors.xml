@@ -8,5 +8,6 @@
     <drawable name="red">#FF0000</drawable>
     <drawable name="black">#000000</drawable>
     <drawable name="green">#00FF00</drawable>
+    <drawable name="beige">#ECEDE8</drawable>
 
 </resources>

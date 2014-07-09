@@ -13,22 +13,93 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp" >
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:layout_gravity="center_horizontal|top"
-            android:src="@drawable/profile_picture" />
 
-        <TextView
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|top"
+                android:src="@drawable/michiel"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/profilePictureAccount" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textView1"
+                android:layout_below="@+id/txtScoreAccount"
+                android:layout_alignLeft="@+id/txtScoreAccount"
+                android:layout_alignStart="@+id/txtScoreAccount" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/txtScoreAccount"
+                android:layout_below="@+id/txtNameAccount"
+                android:layout_alignLeft="@+id/txtNameAccount"
+                android:layout_alignStart="@+id/txtNameAccount" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Medium Text"
+                android:id="@+id/txtNameAccount"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/profilePictureAccount" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Naam" />
+            android:orientation="vertical">
 
-        <TextView
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Total Score"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/progressbar"/>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="lsdfk" />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Favoriten"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:id="@+id/bttnStartBarcodeScan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start barcode scanner"/>
 
     </LinearLayout>
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +15,17 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import osoc14.okfn.geomarketing.ListAdapters.CategoryListAdapter;
+import osoc14.okfn.geomarketing.MyApp;
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.activities.CouponDetailActivity;
 import osoc14.okfn.geomarketing.activities.MainActivity;
 import osoc14.okfn.geomarketing.database.FakeDatabase;
+import osoc14.okfn.geomarketing.finaldatabase.Category;
+import osoc14.okfn.geomarketing.finaldatabase.MyDatabaseHelper;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link CategoryFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link CategoryFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -38,7 +41,7 @@ public class CategoryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnCategorySelectedListener mListener;
     private AbsListView mListView;
     private CategoryListAdapter myCategoryAdapter;
 
@@ -71,8 +74,11 @@ public class CategoryFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        FakeDatabase fd = new FakeDatabase();
-        myCategoryAdapter = new CategoryListAdapter(getActivity(), R.layout.list_item_category, fd.getCategoryItemData());
+        //FakeDatabase fd = new FakeDatabase();
+
+        MyDatabaseHelper db = new MyDatabaseHelper(getActivity().getApplicationContext());
+        myCategoryAdapter = new CategoryListAdapter(getActivity(), R.layout.list_item_category, db.getAllCategories());
+
     }
 
     @Override
@@ -81,20 +87,27 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_category, container, false);
 
-        mListView = (AbsListView) view.findViewById(android.R.id.list);
+        mListView = (AbsListView) view.findViewById(R.id.listViewCategories);
+        mListView.setSelector(R.drawable.selector_listview);
         mListView.setAdapter(myCategoryAdapter);
         mListView.setOnItemClickListener(
             new AbsListView.OnItemClickListener() {
                  @Override
                  public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-
+                     Category category = myCategoryAdapter.getCategory(i);
+                     MyApp.currentCategory = category.getId();
+                     MyApp.currentCategoryFull = category;
+                     if (mListener != null) {
+                         mListener.onCategorySelected(category);
+                     }
+                    /*
+                        ((MainActivity) getActivity()).setCurrentCategory(i);
+                        Toast.makeText(getActivity(), "set category : " + Integer.toString(i), Toast.LENGTH_SHORT).show();
+                        Log.d("data", Integer.toString(((MainActivity) getActivity()).getCurrentCategory()));
                         ((MainActivity) getActivity()).setFragment(1);
-/*
-                       Intent in = new Intent(getActivity(), CouponsFragment.class);
-                       in.putExtra("category_number", i );
-                       Toast.makeText(getActivity(), "ojo category" + i, Toast.LENGTH_SHORT).show();
-                       startActivity(in);*/
+                     MyApp.currentCategory = i;
+                    */
                  }
             }
 
@@ -107,15 +120,16 @@ public class CategoryFragment extends Fragment {
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            //mListener.onCategorySelected(uri);
         }
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        Log.d("lifecycle", "CategoryFragment onAttach");
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnCategorySelectedListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -125,6 +139,7 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+        Log.d("lifecycle", "CategoryFragment onDetach");
         mListener = null;
     }
 
@@ -142,9 +157,9 @@ public class CategoryFragment extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnFragmentInteractionListener {
+    public interface OnCategorySelectedListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onCategorySelected(Category category);
     }
 
 }

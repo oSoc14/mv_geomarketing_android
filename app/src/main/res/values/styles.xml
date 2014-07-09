@@ -17,18 +17,17 @@
 
     <!-- ActionBar title text -->
     <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
-        <item name="android:textColor">@drawable/white</item>
+        <item name="android:textColor">@drawable/beige</item>
     </style>
 
     <!-- ActionBarTabs styles -->
     <style name="MyTabBar" parent="@android:style/Widget.Holo.Light.ActionBar.TabView" >
-        <item name="android:background">@drawable/yellow</item>
-        <item name="android:textColor">#FF0000</item>
+        <item name="android:background">@drawable/beige</item>
     </style>
 
     <!-- ActionBar tabs text styles -->
     <style name="MyActionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
-        <item name="android:textColor">@drawable/white</item>
+        <item name="android:textColor">@drawable/yellow</item>
     </style>
 
     <style name="ActionBarTabStyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">

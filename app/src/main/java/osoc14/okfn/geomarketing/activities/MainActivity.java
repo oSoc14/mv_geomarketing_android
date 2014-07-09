@@ -7,21 +7,66 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.widget.TabHost;
 
+import osoc14.okfn.geomarketing.MyApp;
 import osoc14.okfn.geomarketing.R;
-import osoc14.okfn.geomarketing.fragments.AccountFragment;
+import osoc14.okfn.geomarketing.finaldatabase.Category;
+import osoc14.okfn.geomarketing.fragments.FriendsFragment;
+import osoc14.okfn.geomarketing.fragments.ProfileFragment;
 import osoc14.okfn.geomarketing.fragments.CategoryFragment;
 import osoc14.okfn.geomarketing.fragments.CouponsFragment;
+import osoc14.okfn.geomarketing.fragments.MapFragment;
+import osoc14.okfn.geomarketing.fragments.RequestFragment;
 import osoc14.okfn.geomarketing.fragments.StoresFragment;
 
-public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, AccountFragment.OnFragmentInteractionListener, CategoryFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener, CategoryFragment.OnCategorySelectedListener, MapFragment.OnFragmentInteractionListener, FriendsFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener{
+
+
+
+    @Override
+    public void onCategorySelected(Category category) {
+
+        CouponsFragment couponsFragment = (CouponsFragment) mSectionsPagerAdapter.getItem(1);
+
+
+        if (couponsFragment != null ) {
+            Log.d("data", "couponsFragment != null");
+            couponsFragment.updateCategory();
+
+            //couponsFragment.updateAdaptor();
+        } else {
+            Log.d("data", "couponsFragment == null");
+            MyApp.currentCategoryFull = category;
+            MyApp.currentCategory = category.getId();
+            mViewPager.setCurrentItem(1);
+
+
+        }
+
+        /*
+        CouponsFragment couponsFragment2 = (CouponsFragment) getFragmentManager().findFragmentById(R.id.couponsFragment);
+
+        if (couponsFragment2 != null ) {
+            Log.d("data", "couponsFragment2 != null");
+
+        } else {
+            Log.d("data", "couponsFragment2 == null");
+            mViewPager.setCurrentItem(1);
+        }
+        */
+        //CouponsFragment couponsFragment = (CouponsFragment) mSectionsPagerAdapter.getItem(1);
+
+    }
 
     /**
      *  Listener for CouponsFragment and StoresFragment
@@ -29,6 +74,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
      */
     @Override
     public void onFragmentInteraction(String id) {
+
 
     }
 
@@ -56,14 +102,27 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
      */
     ViewPager mViewPager;
 
+    private TabHost tabHost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //MyApp appState = (MyApp) getApplication();
+
+        if (!MyApp.loggedIn) {
+            Intent in = new Intent(this, LoginActivity.class);
+            in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(in);
+
+        }
+
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -73,15 +132,76 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+
+
+
         // When swiping between different sections, select the corresponding
         // tab. We can also use ActionBar.Tab#select() to do this if we have
         // a reference to the Tab.
+
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
             }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                Log.d("data", "onPageScrolled");
+                if (position == 1) {
+                    CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
+                    //fr.updateData();
+                    Log.d("data", "AAA");
+                    //fr.onResume();
+                    Log.d("data", "BBB");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+                Log.d("data", "ScrollStateChanged");
+            }
         });
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                Log.d("data", "onPageScrolled");
+                /*
+                if (position == 1) {
+                    CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
+                    fr.updateAdaptor();
+                    Log.d("data", "AAA");
+                    //fr.onResume();
+                    Log.d("data", "BBB");
+                }
+
+                */
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                actionBar.setSelectedNavigationItem(position);
+                Log.d("data", "onPageSelected");
+                if (position == 1) {
+                    //CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
+                    //fr.updateData();
+                    Log.d("data", "AAA");
+                    //fr.onResume();
+                    Log.d("data", "BBB");
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                Log.d("data", "ScrollStateChanged");
+            }
+
+        });
+
+        //mViewPager.setOnPageChangeListener(this);
 
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -136,15 +256,29 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
        mViewPager.setCurrentItem(position);
     }
 
+    private int currentCategory = 6;
+
+
+    public int getCurrentCategory() {
+        return currentCategory;
+    }
+
+    public void setCurrentCategory(int currentCategory) {
+        this.currentCategory = currentCategory;
+    }
+
+
+
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+
 
         @Override
         public Fragment getItem(int position) {
@@ -152,25 +286,24 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             // Return a PlaceholderFragment (defined as a static inner class below).
             //return CouponsFragmentFragment.newInstance();
             //return MyPlaceholderFragment.newInstance(position + 1);
+
             switch (position) {
                 case 0:
-                    return CategoryFragment.newInstance("a", "b");
+                    return MapFragment.newInstance("a", "b");
                 case 1:
-                    return CouponsFragment.newInstance();
+                    return ProfileFragment.newInstance("a", "b");
                 case 2:
-                    return StoresFragment.newInstance("a", "b");
+                    return FriendsFragment.newInstance("a", "b");
                 case 3:
-                    return AccountFragment.newInstance("a","b");
+                    return RequestFragment.newInstance("a", "b");
             }
             return null;
-
-
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override
@@ -178,11 +311,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return getString(R.string.title_fragment_category).toUpperCase(l);
-                case 1:
                     return getString(R.string.title_fragment_coupons).toUpperCase(l);
+                case 1:
+                    return getString(R.string.title_fragment_profile).toUpperCase(l);
                 case 2:
-                    return getString(R.string.title_fragment_stores).toUpperCase(l);
+                    return getString(R.string.title_fragment_friends).toUpperCase(l);
+                case 3:
+                    return getString(R.string.title_fragment_request).toUpperCase(l);
             }
             return null;
         }

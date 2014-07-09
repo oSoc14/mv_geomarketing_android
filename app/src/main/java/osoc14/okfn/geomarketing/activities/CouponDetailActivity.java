@@ -2,8 +2,11 @@ package osoc14.okfn.geomarketing.activities;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,6 +17,16 @@ import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.fragments.DetailCouponFragment;
 
 public class CouponDetailActivity extends Activity implements DetailCouponFragment.OnFragmentInteractionListener {
+
+    public static final String ARG_COUPON_ID = "arg_coupon_id";
+
+    public static Intent newIntent(Context context, int id)
+    {
+        final Intent mIntent = new Intent(context, CouponDetailActivity.class);
+        mIntent.putExtra(ARG_COUPON_ID, id);
+        Log.d("data", "koekoek:   " + Integer.toString(id));
+        return mIntent;
+    }
 
     /**
      * Listener for DetailCoupon
@@ -28,11 +41,13 @@ public class CouponDetailActivity extends Activity implements DetailCouponFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        final Bundle data = getIntent().getExtras();
+        if(data.containsKey(ARG_COUPON_ID)) {
+            data.getInt(ARG_COUPON_ID);
+        }
         if (savedInstanceState == null) {
-
-
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new DetailCouponFragment())
+                    .add(R.id.container, DetailCouponFragment.newInstance(data.getInt(ARG_COUPON_ID), "a"))
                     .commit();
         }
     }

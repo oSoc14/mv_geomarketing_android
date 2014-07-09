@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.TestFragment"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/testButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="knop"
+            android:onClick="onButtonPressed"/>
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+<!--
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:id="@+id/myMap"
+        android:name="com.google.android.gms.maps.MapFragment" />
+-->
+    <com.google.android.gms.maps.MapView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:enabled="true"
+        android:id="@+id/myMap"
+        android:apiKey="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w"/>
+
+
+    <ListView
+        android:id="@+id/testListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+
+</LinearLayout>

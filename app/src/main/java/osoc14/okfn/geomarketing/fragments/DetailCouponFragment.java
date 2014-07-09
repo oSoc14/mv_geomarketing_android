@@ -2,11 +2,13 @@ package osoc14.okfn.geomarketing.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +27,15 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.encoder.QRCode;
 
+import osoc14.okfn.geomarketing.MyQRCodeGenerator;
 import osoc14.okfn.geomarketing.R;
+import osoc14.okfn.geomarketing.contentprovider.CouponContentProvider;
+import osoc14.okfn.geomarketing.contentprovider.CouponData;
 import osoc14.okfn.geomarketing.database.CouponItem;
 import osoc14.okfn.geomarketing.database.FakeDatabase;
+import osoc14.okfn.geomarketing.finaldatabase.Coupon;
+import osoc14.okfn.geomarketing.finaldatabase.MyDatabaseHelper;
+import osoc14.okfn.geomarketing.finaldatabase.Store;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,11 +49,11 @@ import osoc14.okfn.geomarketing.database.FakeDatabase;
 public class DetailCouponFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_COUPON_ID = "coupon_id";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private int coupon_id;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
@@ -54,15 +62,14 @@ public class DetailCouponFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
      * @param param2 Parameter 2.
      * @return A new instance of fragment DetailCoupon.
      */
     // TODO: Rename and change types and number of parameters
-    public static DetailCouponFragment newInstance(String param1, String param2) {
+    public static DetailCouponFragment newInstance(int coupon_id, String param2) {
         DetailCouponFragment fragment = new DetailCouponFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_COUPON_ID, coupon_id);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -75,12 +82,12 @@ public class DetailCouponFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+            coupon_id = getArguments().getInt(ARG_COUPON_ID);
+
+            Toast.makeText(getActivity(), Integer.toString(coupon_id), Toast.LENGTH_SHORT).show();
+
         }
-
-
-
     }
 
 
@@ -89,53 +96,30 @@ public class DetailCouponFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
         View view = inflater.inflate(R.layout.fragment_detail_coupon, container, false);
 
         Intent intent = getActivity().getIntent();
-        int number = intent.getIntExtra("object_number", 1);
+        int number = intent.getIntExtra("COUPON_ID", 1);
 
-        FakeDatabase fd = new FakeDatabase();
-        CouponItem[] coupons =  fd.getCouponItemData();
-
-        CouponItem currentCoupon = coupons[number];
 
         TextView txtViewTitle = (TextView) view.findViewById(R.id.txtTitleDetailCoupon);
-        txtViewTitle.setText(currentCoupon.title);
-
-        int resultcode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity());
-
-        Toast.makeText(getActivity(), "available code" + Integer.toString(resultcode), Toast.LENGTH_SHORT).show();
-
         TextView txtViewStoreTitle = (TextView) view.findViewById(R.id.txtStoreDetailCoupon);
-        txtViewStoreTitle.setText(currentCoupon.store);
-
+        TextView txtViewScore = (TextView) view.findViewById(R.id.txtScoreDetailCoupon);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewDetailCoupon);
-        imageView.setImageResource(currentCoupon.resourceIdPicture);
-
         ImageView imageViewQRCode = (ImageView) view.findViewById(R.id.imageViewQRCode);
 
-        QRCodeWriter writer = new QRCodeWriter();
 
-        try {
-
-
-            int matrixWidth = 300;
-
-            BitMatrix matrix = writer.encode("still hard coded dummy code", BarcodeFormat.QR_CODE, matrixWidth, matrixWidth);
-            Bitmap mBitmap = Bitmap.createBitmap(matrixWidth, matrixWidth, Bitmap.Config.ARGB_8888);
-
-            for (int i = 0; i < matrixWidth; i++) {
-                for (int j = 0; j < matrixWidth; j++) {
-                    mBitmap.setPixel(i, j, matrix.get(i, j) ? R.drawable.purple: Color.WHITE);
-                }
-            }
-
-            imageViewQRCode.setImageBitmap(mBitmap);
-            
-        } catch (WriterException e) {
-            e.printStackTrace();
+        final Uri myUri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ONE_COUPON, Integer.toString(coupon_id));
+        Cursor c = getActivity().getContentResolver().query(myUri, null, null, null, null);
+        if ( c.moveToFirst() ) {
+            txtViewTitle.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_NAME)));
+            txtViewStoreTitle.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_NAME)));
+            txtViewScore.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_CATEGORY)));
+            imageView.setImageResource(c.getInt(c.getColumnIndex(CouponData.COLUMN_IMAGE_RES)));
+            MyQRCodeGenerator myQRCodeGenerator = new MyQRCodeGenerator();
+            imageViewQRCode.setImageBitmap(myQRCodeGenerator.getQRBitmap(c.getString(c.getColumnIndex(CouponData.COLUMN_QR_CODE))));
         }
-
 
 
         Button bttnStartNavigation = (Button) view.findViewById(R.id.bttnStartNavigation);

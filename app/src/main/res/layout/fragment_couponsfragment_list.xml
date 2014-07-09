@@ -4,24 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.CouponsFragmentFragment"
-    android:background="#e5e5e5"
-    android:orientation="vertical">
+    android:background="@drawable/purple"
+    android:orientation="vertical"
+    android:id="@+id/couponsFragment"
+    >
 
 
     <fragment
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/map"
+        android:layout_height="250dp"
+        android:id="@+id/myMap"
         android:name="com.google.android.gms.maps.MapFragment" />
 
     <ListView
-        android:id="@android:id/list"
+        android:id="@+id/listViewCoupons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:dividerHeight="0dp"
-        android:divider="@android:color/transparent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp" />
+        android:dividerHeight="1dp"
+        android:divider="@drawable/beige"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/purple"  />
 
 
 </LinearLayout>

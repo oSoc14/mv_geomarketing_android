@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -29,19 +29,32 @@
             android:name=".activities.CouponDetailActivity"
             android:label="@string/title_activity_coupon" >
         </activity>
+        <activity android:name=".activities.StoreDetailActivity" />
         <activity
-            android:name=".activities.StoreDetailActivity" />
+            android:name="com.google.zxing.client.android.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w"/>
+            android:value="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w" />
 
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        </activity>
+
+        <provider
+            android:name=".contentprovider.CouponContentProvider"
+            android:authorities="osoc14.okfn.geomarketing.contentprovider.CouponContentProvider"
+            android:enabled="true"
+            android:exported="true" >
+        </provider>
     </application>
-
-
 
 </manifest>
