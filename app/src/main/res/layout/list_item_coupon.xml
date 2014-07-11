@@ -7,7 +7,8 @@
         android:layout_marginRight="0dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="2dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:background="@drawable/purple">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -19,13 +20,16 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Coupon title"
-                android:textColor="@drawable/purple"
+                android:textColor="@drawable/beige"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:layout_alignParentTop="true"
                 android:id="@+id/txtTitleCoupon" />
@@ -35,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Store name"
-                android:textColor="@drawable/purple"
+                android:textColor="@drawable/beige"
                 android:id="@+id/txtStoreCoupon"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentLeft="true"
@@ -45,38 +49,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Distance"
-                android:textColor="@drawable/purple"
-                android:id="@+id/txtDistanceCoupon"
-                android:layout_below="@+id/txtDistanceCoupon"
+                android:text="Points"
+                android:id="@+id/txtPointsCoupon"
+                android:textColor="@drawable/beige"
+                android:layout_marginRight="26dp"
+                android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Points"
-                android:id="@+id/txtPointsCoupon"
-                android:textColor="@drawable/purple"
-                android:layout_alignTop="@+id/txtStoreCoupon"
-                android:layout_alignLeft="@+id/txtDistanceCoupon"
-                android:layout_alignStart="@+id/txtDistanceCoupon" />
 
         </RelativeLayout>
 
-
-<!--
-    <ImageButton
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/imageButton"
-        android:src="@android:drawable/ic_menu_share"
-        android:background="@android:color/transparent"
-        android:layout_weight="0.05" />
-
--->
 
 
 </LinearLayout>

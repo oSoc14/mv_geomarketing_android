@@ -2,6 +2,7 @@ package osoc14.okfn.geomarketing.ListAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +31,18 @@ public class MyFriendsCursorAdaptor extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "GillSans.ttc");
+        //b.setTypeface(tf);
+
         TextView txtName = (TextView) view.findViewById(R.id.profileNameFriend);
-        txtName.setText(cursor.getString((cursor.getColumnIndex(FriendsData.COLUMN_NAME))));
+        txtName.setTypeface(tf);
+        String name = cursor.getString((cursor.getColumnIndex(FriendsData.COLUMN_NAME)));
+        String arr[] = name.split(" ", 2);
+        txtName.setText(arr[0]);
 
         TextView txtScore = (TextView) view.findViewById(R.id.profileScoreFriend);
-        txtScore.setText(cursor.getString((cursor.getColumnIndex(FriendsData.COLUMN_SCORE))));
-
+        txtScore.setText(cursor.getString((cursor.getColumnIndex(FriendsData.COLUMN_SCORE)))+ " points");
+        txtScore.setTypeface(tf);
         ImageView imageView = (ImageView) view.findViewById(R.id.profileImageFriend);
         imageView.setImageResource(cursor.getInt(cursor.getColumnIndex(FriendsData.COLUMN_IMAGE_RES)));
 

@@ -4,14 +4,17 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.fragments.DetailCouponFragment;
@@ -50,6 +53,22 @@ public class CouponDetailActivity extends Activity implements DetailCouponFragme
                     .add(R.id.container, DetailCouponFragment.newInstance(data.getInt(ARG_COUPON_ID), "a"))
                     .commit();
         }
+
+        initActionBarLayout();
+    }
+
+    private void initActionBarLayout() {
+        getActionBar().setDisplayShowHomeEnabled(false);
+
+        int titleId = getResources().getIdentifier("action_bar_title", "id",
+                "android");
+
+        TextView yourTextView = (TextView) findViewById(titleId);
+        yourTextView.setAllCaps(true);
+        yourTextView.setTextSize(30);
+        yourTextView.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "GillSans.ttc");
+        yourTextView.setTypeface(tf);
     }
 
 

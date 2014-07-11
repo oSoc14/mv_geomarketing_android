@@ -11,9 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp" >
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingTop="@dimen/padding_top"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:background="@drawable/yellow"
+        android:layout_weight="0">
 
         
         <ImageView
@@ -33,28 +36,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Eén pak kopen, frikandel gratis!"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:paddingBottom="5dp"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageViewDetailCoupon" />
+            android:layout_toRightOf="@+id/imageViewDetailCoupon"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
         
         <TextView
             android:id="@+id/txtStoreDetailCoupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Frituur Nadine"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingBottom="5dp"
             android:layout_toRightOf="@+id/imageViewDetailCoupon"
             android:layout_below="@+id/txtTitleDetailCoupon"
-            android:layout_alignRight="@+id/txtTitleDetailCoupon"
-            android:layout_alignEnd="@+id/txtTitleDetailCoupon" />
+            android:layout_toLeftOf="@+id/imageButton" />
         <TextView
             android:id="@+id/txtScoreDetailCoupon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="213 points"
-            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:paddingBottom="5dp"
             android:layout_below="@+id/txtStoreDetailCoupon"
             android:layout_toRightOf="@+id/imageViewDetailCoupon"
@@ -68,31 +72,73 @@
             android:src="@android:drawable/ic_menu_share"
             android:background="@android:color/transparent"
             android:layout_weight="0.05"
-            android:layout_alignTop="@+id/txtTitleDetailCoupon"
-            android:layout_alignBottom="@+id/txtScoreDetailCoupon"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@+id/txtTitleDetailCoupon" />
+            android:layout_alignRight="@+id/txtTitleDetailCoupon"
+            android:layout_alignEnd="@+id/txtTitleDetailCoupon"
+            android:layout_alignTop="@+id/txtStoreDetailCoupon" />
 
 
     </RelativeLayout>
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.2"
-        android:src="@drawable/qr_code"
-        android:layout_gravity="center_horizontal|bottom"
-        android:id="@+id/imageViewQRCode" />
+        android:layout_weight="1"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
 
-    <Button
-        android:id="@+id/bttnStartNavigation"
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:src="@drawable/qr_code"
+            android:id="@+id/imageViewQRCode"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true" />
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Start navigating"
-        android:layout_alignBottom="@+id/imageView2"
-        android:layout_gravity="center_horizontal|bottom"
-        android:onClick="startNavigator"/>
+        android:layout_height="280dp"
+        android:background="@drawable/purple"
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingTop="@dimen/padding_top"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Friends 182+"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingBottom="30dp"
+            android:textColor="@drawable/beige"
+            android:layout_alignRight="@+id/bttnStartNavigation"
+            android:layout_alignEnd="@+id/bttnStartNavigation"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <Button
+            android:id="@+id/bttnStartNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start navigating"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/purple"
+            android:textColor="@drawable/beige"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+
+    </RelativeLayout>
+
+
 
 
 </LinearLayout>

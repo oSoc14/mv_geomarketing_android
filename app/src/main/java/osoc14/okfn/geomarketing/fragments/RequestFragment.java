@@ -5,6 +5,7 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -88,8 +89,11 @@ public class RequestFragment extends Fragment implements LoaderManager.LoaderCal
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_request, container, false);
 
+
+
         listActivities = (ListView) v.findViewById(R.id.list_activityFriends);
         listRequests = (ListView) v.findViewById(R.id.list_requests);
+
 
         myActivityAdaptor = new MyActivitiesCursorAdaptor(getActivity(), null, 0);
         myRequestAdaptor = new MyRequestsCursorAdaptor(getActivity(), null, 0);
@@ -152,13 +156,13 @@ public class RequestFragment extends Fragment implements LoaderManager.LoaderCal
         switch (loader.getId())
         {
             case LOADER_ACTIVITIES:
-                if(cursor.moveToFirst())
+                if(!cursor.isClosed() && cursor.moveToFirst())
                 {
                     myActivityAdaptor.swapCursor(cursor);
                 }
                 break;
             case LOADER_REQUESTS:
-                if(cursor.moveToFirst())
+                if(!cursor.isClosed() && cursor.moveToFirst())
                 {
                     myRequestAdaptor.swapCursor(cursor);
                 }

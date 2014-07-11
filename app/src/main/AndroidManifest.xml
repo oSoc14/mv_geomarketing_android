@@ -15,7 +15,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_kupon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.Kuponstyle" >
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main" >
@@ -27,9 +27,11 @@
         </activity>
         <activity
             android:name=".activities.CouponDetailActivity"
-            android:label="@string/title_activity_coupon" >
+            android:label="@string/title_activity_coupon"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
-        <activity android:name=".activities.StoreDetailActivity" />
+        <activity android:name=".activities.StoreDetailActivity"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
             android:name="com.google.zxing.client.android.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -41,7 +43,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w" />
+            android:value="AIzaSyD8FvQGfdhM9NmrBZb2C6zyV6_3ZwxJ9eA" />
 
         <activity
             android:name=".activities.LoginActivity"

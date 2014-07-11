@@ -157,9 +157,9 @@ public class CouponsFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_couponsfragment, container, false);
 
-        int currentCategory = ((MainActivity) getActivity()).getCurrentCategory();
+        //int currentCategory = ((MainActivity) getActivity()).getCurrentCategory();
 
-        Log.d("data", Integer.toString(currentCategory));
+        //Log.d("data", Integer.toString(currentCategory));
 
 
         MyDatabaseHelper db = new MyDatabaseHelper(getActivity().getApplicationContext());

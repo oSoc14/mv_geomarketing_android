@@ -17,6 +17,12 @@ public class CouponData {
     public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_IMAGE_RES = "image_res";
     public static final String COLUMN_QR_CODE = "qr_code";
+    public static final String COLUMN_POINTS = "points";
+    public static final String COLUMN_IMAGE_MARKER_U = "image_marker_u";
+    public static final String COLUMN_IMAGE_MARKER_S = "image_marker_s";
+    public static final String COLUMN_LAT = "lat";
+    public static final String COLUMN_LNG = "lng";
+
 
 
     // Database creation SQL statement
@@ -28,7 +34,12 @@ public class CouponData {
             + COLUMN_STORE + " text, "
             + COLUMN_CATEGORY + " text, "
             + COLUMN_IMAGE_RES + " integer, "
-            + COLUMN_QR_CODE + " text "
+            + COLUMN_QR_CODE + " text, "
+            + COLUMN_POINTS + " integer, "
+            + COLUMN_IMAGE_MARKER_U + " integer, "
+            + COLUMN_IMAGE_MARKER_S + " integer, "
+            + COLUMN_LAT + " double,"
+            + COLUMN_LNG + " double"
             + ");";
 
 

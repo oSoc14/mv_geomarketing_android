@@ -10,4 +10,7 @@
     <drawable name="green">#00FF00</drawable>
     <drawable name="beige">#ECEDE8</drawable>
 
+    <color name="purple2">#564C95</color>
+    <color name="beige2">#ECEDE8</color>
+
 </resources>

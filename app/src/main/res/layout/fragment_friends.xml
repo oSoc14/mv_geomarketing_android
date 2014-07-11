@@ -5,15 +5,35 @@
     tools:context=".fragments.FriendsFragment"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/testButtonFriends"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add friends knop" />
+        android:paddingLeft="@dimen/padding_left"
+        android:paddingRight="@dimen/padding_right"
+        android:paddingBottom="@dimen/padding_bottom"
+        android:paddingTop="@dimen/padding_top"
+        android:background="@drawable/purple">
 
+        <Button
+            android:id="@+id/testButtonFriends"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add friends"
+            android:textColor="@drawable/beige"/>
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/friendsGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="4">
+
+    </GridView>
+    <!--
     <ListView
         android:id="@+id/friendsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
+-->
 </LinearLayout>

@@ -1,37 +1,102 @@
 <resources>
 
-    <!-- Base application theme. -->
+     <style name="Theme.Kuponstyle" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_kuponstyle</item>
+        <item name="android:popupMenuStyle">@style/PopupMenu.Kuponstyle</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Kuponstyle</item>
+        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle.Kuponstyle</item>
+        <item name="android:actionDropDownStyle">@style/DropDownNav.Kuponstyle</item>
+        <item name="android:actionBarStyle">@style/ActionBar.Solid.Kuponstyle</item>
+        <item name="android:actionModeBackground">@drawable/cab_background_top_kuponstyle</item>
+        <item name="android:actionModeSplitBackground">@drawable/cab_background_bottom_kuponstyle</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Kuponstyle</item>
+        
+        
+    </style>
+
+    <style name="ActionBar.Solid.Kuponstyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:background">@drawable/ab_solid_kuponstyle</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_kuponstyle</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_kuponstyle</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Kuponstyle</item>
+        <item name="android:titleTextStyle">@style/MyActionBarTextAppearance</item>
+    </style>
+
+    <style name="MyActionBarTextAppearance" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@drawable/beige</item>
+    </style>
+
+    <style name="ActionBar.Transparent.Kuponstyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@drawable/ab_transparent_kuponstyle</item>
+        <item name="android:progressBarStyle">@style/ProgressBar.Kuponstyle</item>
+    </style>
+
+    <style name="PopupMenu.Kuponstyle" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_kuponstyle</item>    
+    </style>
+
+    <style name="DropDownListView.Kuponstyle" parent="@android:style/Widget.Holo.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_kuponstyle</item>
+    </style>
+
+    <style name="ActionBarTabStyle.Kuponstyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_kuponstyle</item>
+    </style>
+
+    <style name="DropDownNav.Kuponstyle" parent="@android:style/Widget.Holo.Light.Spinner">
+        <item name="android:background">@drawable/spinner_background_ab_kuponstyle</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_kuponstyle</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_kuponstyle</item>
+    </style>
+    
+    <style name="ProgressBar.Kuponstyle" parent="@android:style/Widget.Holo.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_kuponstyle</item>
+    </style>
+    
+    <style name="ActionButton.CloseMode.Kuponstyle" parent="@android:style/Widget.Holo.Light.ActionButton.CloseMode">
+        <item name="android:background">@drawable/btn_cab_done_kuponstyle</item>
+    </style>
+
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.Kuponstyle.Widget" parent="@android:style/Theme.Holo">
+        <item name="android:popupMenuStyle">@style/PopupMenu.Kuponstyle</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListView.Kuponstyle</item>
+    </style>
+
+
+    <!-- Base application theme. 
     <style name="AppTheme" parent="android:Theme.Holo.Light">
         <item name="android:actionBarStyle">@style/MyActionBar</item>
-        <item name="android:actionBarTabBarStyle">@style/MyTabBar</item>
         <item name="android:actionBarItemBackground">@drawable/selectable_background</item>
-        <item name="android:actionBarTabStyle">@style/ActionBarTabStyle</item>
-        <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
+        <item name="android:actionBarTabStyle">@style/MyActionBarTabStyle</item>
+    </style>
+
+    <style name="MyActionBarTabStyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/tab_indicator_ab_example</item>
     </style>
 
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@drawable/purple</item>
         <item name="android:titleTextStyle">@style/MyActionBarTitleText</item>
-        <item name="android:actionBarTabTextStyle">@style/MyActionBarTabText</item>
-    </style>
 
-    <!-- ActionBar title text -->
+    </style>
+-->
+    <!-- ActionBar title text 
     <style name="MyActionBarTitleText" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
         <item name="android:textColor">@drawable/beige</item>
     </style>
-
-    <!-- ActionBarTabs styles -->
+    -->
+    <!-- ActionBarTabs styles
     <style name="MyTabBar" parent="@android:style/Widget.Holo.Light.ActionBar.TabView" >
         <item name="android:background">@drawable/beige</item>
     </style>
-
-    <!-- ActionBar tabs text styles -->
+-->
+    <!-- ActionBar tabs text styles
     <style name="MyActionBarTabText" parent="@android:style/Widget.Holo.ActionBar.TabText">
         <item name="android:textColor">@drawable/yellow</item>
     </style>
-
     <style name="ActionBarTabStyle" parent="@android:style/Widget.Holo.Light.ActionBar.TabView">
         <item name="android:background">@drawable/tab_indicator_ab_example</item>
     </style>
-
+    -->
 </resources>

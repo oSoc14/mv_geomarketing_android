@@ -5,6 +5,7 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ListView;
 
 import osoc14.okfn.geomarketing.ListAdapters.MyFriendsCursorAdaptor;
@@ -47,6 +49,7 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
     private MyFriendsCursorAdaptor myAdaptor;
 
     private ListView list;
+    private GridView grid;
 
     /**
      * Use this factory method to create a new instance of
@@ -93,10 +96,13 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
                 DummyData.insertDummyFriends(getActivity());
             }
         });
-
-        list = (ListView) v.findViewById(R.id.friendsListView);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "GillSans.ttc");
+        b.setTypeface(tf);
+        //list = (ListView) v.findViewById(R.id.friendsListView);
+        grid = (GridView) v.findViewById(R.id.friendsGridView);
         myAdaptor = new MyFriendsCursorAdaptor(getActivity(), null, 0);
-        list.setAdapter(myAdaptor);
+        //list.setAdapter(myAdaptor);
+        grid.setAdapter(myAdaptor);
 
         return v;
     }
@@ -145,7 +151,7 @@ public class FriendsFragment extends Fragment implements LoaderManager.LoaderCal
         switch (loader.getId())
         {
             case LOADER_FRIEND:
-                if(cursor.moveToFirst())
+                if(!cursor.isClosed() && cursor.moveToFirst())
                 {
                     //adapter.swapCursor(cursor);
                     myAdaptor.swapCursor(cursor);

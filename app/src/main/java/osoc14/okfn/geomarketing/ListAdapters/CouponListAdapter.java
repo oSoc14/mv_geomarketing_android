@@ -61,8 +61,8 @@ public class CouponListAdapter extends ArrayAdapter<Coupon> {
         TextView txtStore = (TextView) convertView.findViewById(R.id.txtStoreCoupon);
         txtStore.setText("by " + couponItem.getStore_id());
 
-        TextView txtDistance = (TextView) convertView.findViewById(R.id.txtDistanceCoupon);
-        txtDistance.setText("Within " + (couponItem.getQrCode()) + "m");
+        //TextView txtDistance = (TextView) convertView.findViewById(R.id.txtDistanceCoupon);
+        //txtDistance.setText("Within " + (couponItem.getQrCode()) + "m");
 
         ImageView img = (ImageView) convertView.findViewById(R.id.imageViewCoupon);
         img.setImageResource(R.drawable.pitta);

@@ -3,6 +3,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/yellow"
+
     >
 
     <ImageView
@@ -10,54 +12,76 @@
         android:layout_height="wrap_content"
         android:id="@+id/imgProfileRequest"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/butcher"/>
+        android:src="@drawable/butcher"
+        android:adjustViewBounds="true"/>
 
     <RelativeLayout
-        android:layout_width="222dp"
-        android:layout_height="wrap_content" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/txtNameActionRequest"
-            android:layout_alignParentTop="true"
+            android:text="Samuel invited you to share"
+            android:id="@+id/txtNameUserRequest"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/imageButton2"
+            android:layout_toStartOf="@+id/imageButton2" />
+
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/txtUserRequest"
-            android:layout_below="@+id/txtNameActionRequest"
+            android:text="Alles aan halve prijs @ De zuivelfabriek"
+            android:id="@+id/txtActionRequest"
+            android:layout_below="@+id/txtNameUserRequest"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignRight="@+id/txtNameUserRequest"
+            android:layout_alignEnd="@+id/txtNameUserRequest" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Medium Text"
-            android:id="@+id/txtScoreRequest"
-            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/padding_bottom"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:id="@+id/linearLayout">
 
+        </LinearLayout>
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/arrow_up_float"
+            android:id="@+id/imageButton2"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:paddingRight="@dimen/padding_right"
+            android:layout_alignTop="@+id/txtNameUserRequest"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@+id/txtActionRequest" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/arrow_down_float"
+            android:id="@+id/imageButton1"
+            android:background="@android:color/transparent"
+            android:paddingRight="@dimen/padding_right"
+            android:layout_alignTop="@+id/txtActionRequest"
+            android:layout_toLeftOf="@+id/linearLayout"
+            android:layout_toStartOf="@+id/linearLayout" />
+
+        -->
     </RelativeLayout>
 
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_delete"
-        android:background="@android:color/transparent"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_input_add"
-        android:background="@android:color/transparent"/>
 </LinearLayout>

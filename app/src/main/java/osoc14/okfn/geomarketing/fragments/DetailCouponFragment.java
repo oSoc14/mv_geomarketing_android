@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -33,9 +34,8 @@ import osoc14.okfn.geomarketing.contentprovider.CouponContentProvider;
 import osoc14.okfn.geomarketing.contentprovider.CouponData;
 import osoc14.okfn.geomarketing.database.CouponItem;
 import osoc14.okfn.geomarketing.database.FakeDatabase;
-import osoc14.okfn.geomarketing.finaldatabase.Coupon;
-import osoc14.okfn.geomarketing.finaldatabase.MyDatabaseHelper;
-import osoc14.okfn.geomarketing.finaldatabase.Store;
+import osoc14.okfn.geomarketing.model.Coupon;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +55,8 @@ public class DetailCouponFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private int coupon_id;
     private String mParam2;
+
+    private Coupon coupon;
 
     private OnFragmentInteractionListener mListener;
 
@@ -88,6 +90,13 @@ public class DetailCouponFragment extends Fragment {
             Toast.makeText(getActivity(), Integer.toString(coupon_id), Toast.LENGTH_SHORT).show();
 
         }
+
+        final Uri myUri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ONE_COUPON, Integer.toString(coupon_id));
+        Cursor c = getActivity().getContentResolver().query(myUri, null, null, null, null);
+
+        coupon = Coupon.getCoupon(c);
+
+
     }
 
 
@@ -98,28 +107,31 @@ public class DetailCouponFragment extends Fragment {
 
 
         View view = inflater.inflate(R.layout.fragment_detail_coupon, container, false);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "GillSans.ttc");
+        //b.setTypeface(tf);
 
         Intent intent = getActivity().getIntent();
         int number = intent.getIntExtra("COUPON_ID", 1);
 
 
         TextView txtViewTitle = (TextView) view.findViewById(R.id.txtTitleDetailCoupon);
+        txtViewTitle.setTypeface(tf);
         TextView txtViewStoreTitle = (TextView) view.findViewById(R.id.txtStoreDetailCoupon);
+        txtViewStoreTitle.setTypeface(tf);
         TextView txtViewScore = (TextView) view.findViewById(R.id.txtScoreDetailCoupon);
+        txtViewScore.setTypeface(tf);
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewDetailCoupon);
         ImageView imageViewQRCode = (ImageView) view.findViewById(R.id.imageViewQRCode);
 
+        txtViewTitle.setText(coupon.getName());
+        txtViewStoreTitle.setText(coupon.getStore());
+        txtViewScore.setText(Integer.toString(coupon.getPoints())+ " Points");
+        imageView.setImageResource(coupon.getImageRes());
 
-        final Uri myUri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ONE_COUPON, Integer.toString(coupon_id));
-        Cursor c = getActivity().getContentResolver().query(myUri, null, null, null, null);
-        if ( c.moveToFirst() ) {
-            txtViewTitle.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_NAME)));
-            txtViewStoreTitle.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_NAME)));
-            txtViewScore.setText(c.getString(c.getColumnIndex(CouponData.COLUMN_CATEGORY)));
-            imageView.setImageResource(c.getInt(c.getColumnIndex(CouponData.COLUMN_IMAGE_RES)));
-            MyQRCodeGenerator myQRCodeGenerator = new MyQRCodeGenerator();
-            imageViewQRCode.setImageBitmap(myQRCodeGenerator.getQRBitmap(c.getString(c.getColumnIndex(CouponData.COLUMN_QR_CODE))));
-        }
+        MyQRCodeGenerator myQRCodeGenerator = new MyQRCodeGenerator();
+        imageViewQRCode.setImageBitmap(myQRCodeGenerator.getQRBitmap(coupon.getQrCode(), Color.BLACK ,getResources().getColor(R.color.beige2)));
+
+        getActivity().setTitle("YOUR KUPON" );
 
 
         Button bttnStartNavigation = (Button) view.findViewById(R.id.bttnStartNavigation);
@@ -127,10 +139,10 @@ public class DetailCouponFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                LatLng destination = new LatLng(51.04224998071354,3.7289692461490627);
+                LatLng destination = new LatLng(coupon.getLat(),coupon.getLng());
 
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:q=" + destination.latitude+","+destination.longitude));
-                startActivity(i); // misschien de ";" die het probleem is?
+                startActivity(i);
 
             }
         });

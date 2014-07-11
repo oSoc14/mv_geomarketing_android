@@ -2,6 +2,7 @@ package osoc14.okfn.geomarketing.ListAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import osoc14.okfn.geomarketing.LLOG;
+import osoc14.okfn.geomarketing.MyGoogleMapHelper;
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.contentprovider.CouponData;
 
@@ -20,9 +22,12 @@ import osoc14.okfn.geomarketing.contentprovider.CouponData;
  */
 public class MyCouponsCursorAdaptor extends CursorAdapter {
 
+    MyGoogleMapHelper myGoogleMapHelper;
 
-    public MyCouponsCursorAdaptor(Context context, Cursor c, int flags) {
+
+    public MyCouponsCursorAdaptor(Context context, Cursor c, int flags, MyGoogleMapHelper myGoogleMapHelper) {
         super(context, c, flags);
+        this.myGoogleMapHelper = myGoogleMapHelper;
     }
 
 
@@ -37,20 +42,34 @@ public class MyCouponsCursorAdaptor extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "GillSans.ttc");
+
+
         TextView txtName = (TextView) view.findViewById(R.id.txtTitleCoupon);
         txtName.setText(cursor.getString((cursor.getColumnIndex(CouponData.COLUMN_NAME))));
+        txtName.setTypeface(tf);
 
-        TextView txtDist = (TextView) view.findViewById(R.id.txtDistanceCoupon);
-        txtDist.setText("23.1 km");
+        //TextView txtDist = (TextView) view.findViewById(R.id.txtDistanceCoupon);
+        //txtDist.setText("23.1 km");
 
         TextView txtStore = (TextView) view.findViewById(R.id.txtStoreCoupon);
-        txtStore.setText("Winkel");
+        txtStore.setText(cursor.getString(cursor.getColumnIndex(CouponData.COLUMN_STORE)));
+        txtStore.setTypeface(tf);
+
 
         TextView txtPoints = (TextView) view.findViewById(R.id.txtPointsCoupon);
-        txtPoints.setText("212 points");
+        txtPoints.setText(Integer.toString(cursor.getInt(cursor.getColumnIndex(CouponData.COLUMN_POINTS)))+ "punten");
 
         ImageView imageView = (ImageView) view.findViewById(R.id.imageViewCoupon);
         imageView.setImageResource(cursor.getInt(cursor.getColumnIndex(CouponData.COLUMN_IMAGE_RES)));
+
+        double lat = cursor.getDouble(cursor.getColumnIndex(CouponData.COLUMN_LAT));
+        double lng = cursor.getDouble(cursor.getColumnIndex(CouponData.COLUMN_LNG));
+        int img = cursor.getInt(cursor.getColumnIndex(CouponData.COLUMN_IMAGE_MARKER_U));
+        String title = cursor.getString(cursor.getColumnIndex(CouponData.COLUMN_STORE));
+        myGoogleMapHelper.setMarker(lat, lng, img, title);
+
 
     }
 

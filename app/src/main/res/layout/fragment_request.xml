@@ -5,32 +5,28 @@
     tools:context=".fragments.RequestFragment"
     android:orientation="vertical"
     android:weightSum="1"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp">
-
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Voorstellen"
-        android:paddingTop="10dp"/>
+    android:background="@drawable/blue">
 
     <ListView
         android:id="@+id/list_requests"
         android:layout_width="match_parent"
-        android:layout_height="172dp"></ListView>
-
-    <TextView
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Activiteit vrienden"
-        android:paddingTop="10dp"/>
+        android:background="@drawable/beige"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@drawable/beige"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0" />
+
+
 
     <ListView
         android:id="@+id/list_activityFriends"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent"
+        android:background="@drawable/beige"></ListView>
 
 
 </LinearLayout>

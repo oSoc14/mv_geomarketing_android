@@ -8,15 +8,18 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import osoc14.okfn.geomarketing.MyApp;
 import osoc14.okfn.geomarketing.R;
@@ -29,44 +32,8 @@ import osoc14.okfn.geomarketing.fragments.MapFragment;
 import osoc14.okfn.geomarketing.fragments.RequestFragment;
 import osoc14.okfn.geomarketing.fragments.StoresFragment;
 
-public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener, CategoryFragment.OnCategorySelectedListener, MapFragment.OnFragmentInteractionListener, FriendsFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener{
+public class MainActivity extends Activity implements ActionBar.TabListener, CouponsFragment.OnFragmentInteractionListener, StoresFragment.OnFragmentInteractionListener, ProfileFragment.OnFragmentInteractionListener, MapFragment.OnFragmentInteractionListener, FriendsFragment.OnFragmentInteractionListener, RequestFragment.OnFragmentInteractionListener {
 
-
-
-    @Override
-    public void onCategorySelected(Category category) {
-
-        CouponsFragment couponsFragment = (CouponsFragment) mSectionsPagerAdapter.getItem(1);
-
-
-        if (couponsFragment != null ) {
-            Log.d("data", "couponsFragment != null");
-            couponsFragment.updateCategory();
-
-            //couponsFragment.updateAdaptor();
-        } else {
-            Log.d("data", "couponsFragment == null");
-            MyApp.currentCategoryFull = category;
-            MyApp.currentCategory = category.getId();
-            mViewPager.setCurrentItem(1);
-
-
-        }
-
-        /*
-        CouponsFragment couponsFragment2 = (CouponsFragment) getFragmentManager().findFragmentById(R.id.couponsFragment);
-
-        if (couponsFragment2 != null ) {
-            Log.d("data", "couponsFragment2 != null");
-
-        } else {
-            Log.d("data", "couponsFragment2 == null");
-            mViewPager.setCurrentItem(1);
-        }
-        */
-        //CouponsFragment couponsFragment = (CouponsFragment) mSectionsPagerAdapter.getItem(1);
-
-    }
 
     /**
      *  Listener for CouponsFragment and StoresFragment
@@ -74,7 +41,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
      */
     @Override
     public void onFragmentInteraction(String id) {
-
 
     }
 
@@ -101,7 +67,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
-
     private TabHost tabHost;
 
     @Override
@@ -110,19 +75,18 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
         setContentView(R.layout.activity_main);
 
 
-        //MyApp appState = (MyApp) getApplication();
-
         if (!MyApp.loggedIn) {
             Intent in = new Intent(this, LoginActivity.class);
             in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(in);
-
         }
+
+        initActionBarLayout();
+
 
         // Set up the action bar.
         final ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
 
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
@@ -131,7 +95,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
 
 
@@ -148,20 +111,11 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-                Log.d("data", "onPageScrolled");
-                if (position == 1) {
-                    CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
-                    //fr.updateData();
-                    Log.d("data", "AAA");
-                    //fr.onResume();
-                    Log.d("data", "BBB");
-                }
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
                 super.onPageScrollStateChanged(state);
-                Log.d("data", "ScrollStateChanged");
             }
         });
 
@@ -169,29 +123,13 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 Log.d("data", "onPageScrolled");
-                /*
-                if (position == 1) {
-                    CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
-                    fr.updateAdaptor();
-                    Log.d("data", "AAA");
-                    //fr.onResume();
-                    Log.d("data", "BBB");
-                }
 
-                */
             }
 
             @Override
             public void onPageSelected(int position) {
                 actionBar.setSelectedNavigationItem(position);
-                Log.d("data", "onPageSelected");
-                if (position == 1) {
-                    //CouponsFragment fr = (CouponsFragment) mSectionsPagerAdapter.getItem(position);
-                    //fr.updateData();
-                    Log.d("data", "AAA");
-                    //fr.onResume();
-                    Log.d("data", "BBB");
-                }
+
             }
 
             @Override
@@ -201,7 +139,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
 
         });
 
-        //mViewPager.setOnPageChangeListener(this);
+
 
         // For each of the sections in the app, add a tab to the action bar.
         for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -209,12 +147,42 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
             // the adapter. Also specify this Activity object, which implements
             // the TabListener interface, as the callback (listener) for when
             // this tab is selected.
-            actionBar.addTab(
-                    actionBar.newTab()
-                            .setText(mSectionsPagerAdapter.getPageTitle(i))
-                            .setTabListener(this));
+
+            ActionBar.Tab t = actionBar.newTab();
+
+            switch (i) {
+                case 0:
+                    t.setIcon(R.drawable.ic_action_tabs5);
+                    break;
+                case 1:
+                    t.setIcon(R.drawable.ic_action_tabs6);
+                    break;
+                case 2:
+                    t.setIcon(R.drawable.ic_action_tabs7);
+                    break;
+                case 3:
+                    t.setIcon(R.drawable.ic_action_tabs8);
+                    break;
+            }
+            t.setTabListener(this);
+
+            actionBar.addTab(t);
             actionBar.setTitle(R.string.app_name);
         }
+    }
+
+    private void initActionBarLayout() {
+        getActionBar().setDisplayShowHomeEnabled(false);
+
+        int titleId = getResources().getIdentifier("action_bar_title", "id",
+                "android");
+
+        TextView yourTextView = (TextView) findViewById(titleId);
+        yourTextView.setAllCaps(true);
+        yourTextView.setTextSize(30);
+        yourTextView.setGravity(Gravity.CENTER | Gravity.CENTER_HORIZONTAL);
+        Typeface tf = Typeface.createFromAsset(getAssets(), "GillSans.ttc");
+        yourTextView.setTypeface(tf);
     }
 
 
@@ -242,10 +210,41 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
+        switch (tab.getPosition()) {
+            case 0:
+                tab.setIcon(R.drawable.ic_action_tabs1);
+
+                break;
+            case 1:
+                tab.setIcon(R.drawable.ic_action_tabs2);
+                break;
+            case 2:
+                tab.setIcon(R.drawable.ic_action_tabs3);
+                break;
+            case 3:
+                tab.setIcon(R.drawable.ic_action_tabs4);
+                break;
+        }
+
     }
 
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+
+        switch (tab.getPosition()) {
+            case 0:
+                tab.setIcon(R.drawable.ic_action_tabs5);
+                break;
+            case 1:
+                tab.setIcon(R.drawable.ic_action_tabs6);
+                break;
+            case 2:
+                tab.setIcon(R.drawable.ic_action_tabs7);
+                break;
+            case 3:
+                tab.setIcon(R.drawable.ic_action_tabs8);
+                break;
+        }
     }
 
     @Override
@@ -254,17 +253,6 @@ public class MainActivity extends Activity implements ActionBar.TabListener, Cou
 
     public void setFragment(int position) {
        mViewPager.setCurrentItem(position);
-    }
-
-    private int currentCategory = 6;
-
-
-    public int getCurrentCategory() {
-        return currentCategory;
-    }
-
-    public void setCurrentCategory(int currentCategory) {
-        this.currentCategory = currentCategory;
     }
 
 

@@ -6,6 +6,7 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -16,13 +17,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +64,9 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
     private OnFragmentInteractionListener mListener;
     private SimpleCursorAdapter adapter;
     private MyCouponsCursorAdaptor myAdaptor;
-    private MyGoogleMapHelper googleMapHelper;
+    //private MyGoogleMapHelper googleMapHelper;
     private GoogleMap googleMap;
+    private MyGoogleMapHelper mapHelper;
 
     private String currentCategory = "All";
 
@@ -101,12 +109,38 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
     }
 
     @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_map, container, false);
 
-        Button b = (Button) v.findViewById(R.id.testButton);
+        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "GillSans.ttc");
+        //b.setTypeface(tf);
+
+        ImageButton b = (ImageButton) v.findViewById(R.id.testButton);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,17 +152,21 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         });
 
         list = (ListView) v.findViewById(R.id.testListView);
+        list.setSelector(R.drawable.selector_listview);
 
         // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.myMap);
         mapView.onCreate(savedInstanceState);
 
-        // Gets to GoogleMap from the MapView and does initialization stuff
-        googleMap = mapView.getMap();
-        googleMapHelper = new MyGoogleMapHelper(googleMap);
-        googleMapHelper.initializeMap();
+        MapsInitializer.initialize(getActivity());
 
-        myAdaptor = new MyCouponsCursorAdaptor(getActivity(), null, 0);
+        googleMap = mapView.getMap();
+        mapHelper = new MyGoogleMapHelper(googleMap);
+        mapHelper.initializeMap();
+        mapHelper.setStaticPoints();
+
+
+        myAdaptor = new MyCouponsCursorAdaptor(getActivity(), null, 0, mapHelper);
         list.setAdapter(myAdaptor);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -139,6 +177,7 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
 
         final Spinner spinner1 = (Spinner) v.findViewById(R.id.spinner1);
         List<String> list = new ArrayList<String>();
+        list.add("All");
         list.add("Food");
         list.add("Bars");
         list.add("Electronics");
@@ -168,10 +207,11 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
     }
 
     private void restartLoader(){
-        //getLoaderManager().initLoader(LOADER_COUPON, null, this);
 
-        getLoaderManager().destroyLoader(LOADER_COUPON);
+        //getLoaderManager().destroyLoader(LOADER_COUPON);
         getLoaderManager().restartLoader(LOADER_COUPON, null, this);
+        mapHelper.resetMap();
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -223,10 +263,11 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         switch (loader.getId())
         {
             case LOADER_COUPON:
-                if(cursor.moveToFirst())
+                if(!cursor.isClosed() && cursor.moveToFirst())
                 {
                     //adapter.swapCursor(cursor);
                     myAdaptor.swapCursor(cursor);
+
                 }
                 break;
 

@@ -8,52 +8,65 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" >
-
-
+        android:orientation="vertical" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/yellow"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:paddingTop="@dimen/padding_top"
+            android:paddingBottom="@dimen/padding_bottom" >
+
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:src="@drawable/michiel"
+                android:src="@drawable/samuel"
+                android:paddingBottom="5dp"
+                android:id="@+id/profilePictureAccount"
+                android:paddingRight="10dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/profilePictureAccount" />
+                android:layout_alignParentStart="true" />
+
 
             <TextView
+                android:id="@+id/txtNameAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/textView1"
-                android:layout_below="@+id/txtScoreAccount"
-                android:layout_alignLeft="@+id/txtScoreAccount"
-                android:layout_alignStart="@+id/txtScoreAccount" />
+                android:text="Samuel Vandecasteele"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:paddingBottom="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/profilePictureAccount"
+
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txtStoreDetailCoupon"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Level 16"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/txtScoreAccount"
+                android:paddingBottom="5dp"
                 android:layout_below="@+id/txtNameAccount"
                 android:layout_alignLeft="@+id/txtNameAccount"
                 android:layout_alignStart="@+id/txtNameAccount" />
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/txtScoreAccount"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="165 points"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/txtNameAccount"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/profilePictureAccount" />
+                android:paddingBottom="5dp"
+                android:layout_alignTop="@+id/txtStoreDetailCoupon"
+                android:layout_alignLeft="@+id/txtNameAccount"
+                android:layout_alignStart="@+id/txtNameAccount"
+                android:layout_marginLeft="85dp"
+                android:gravity="right" />
 
 
         </RelativeLayout>
@@ -62,32 +75,75 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/white">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="You're getting there !"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Total Score"/>
+                android:textColor="@drawable/purple"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingTop="@dimen/padding_top"/>
+
+
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/progressbar"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/score"/>
 
         </LinearLayout>
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/purple"
+            >
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtTitleAccountFavoriteStores"
+                android:text="Favorite stores"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Favoriten"/>
+                android:textColor="@drawable/beige"
+                android:paddingLeft="@dimen/padding_left"
+                android:paddingRight="@dimen/padding_right"
+                android:paddingTop="@dimen/padding_top"
+                android:paddingBottom="@dimen/padding_bottom"/>
+            <!--
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_favorite_stores">
+            </ListView>
+            -->
+            <GridView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/grid_favorite_stores"
+                android:numColumns="4"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:paddingTop="0dp"
+                android:paddingBottom="0dp">
+            </GridView>
 
+
+
+
+            <Button
+                android:id="@+id/bttnStartBarcodeScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Start barcode scanner"
+                android:textColor="@drawable/beige"/>
 
 
         </LinearLayout>
@@ -95,11 +151,7 @@
 
 
 
-        <Button
-            android:id="@+id/bttnStartBarcodeScan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start barcode scanner"/>
+
 
     </LinearLayout>
 

@@ -2,6 +2,7 @@ package osoc14.okfn.geomarketing.ListAdapters;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import osoc14.okfn.geomarketing.R;
 import osoc14.okfn.geomarketing.contentprovider.ActivityData;
+import osoc14.okfn.geomarketing.contentprovider.FriendsData;
 import osoc14.okfn.geomarketing.contentprovider.RequestData;
 
 /**
@@ -31,17 +33,23 @@ public class MyRequestsCursorAdaptor extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
+
+        Typeface tf = Typeface.createFromAsset(context.getAssets(), "GillSans.ttc");
         ImageView img = (ImageView) view.findViewById(R.id.imgProfileRequest);
         img.setImageResource(cursor.getInt(cursor.getColumnIndex(RequestData.COLUMN_IMAGE_RES)));
 
-        TextView txtAction = (TextView) view.findViewById(R.id.txtNameActionRequest);
-        txtAction.setText(cursor.getString(cursor.getColumnIndex(RequestData.COLUMN_NAME)));
+        TextView txtAction = (TextView) view.findViewById(R.id.txtActionRequest);
 
-        TextView txtStore = (TextView) view.findViewById(R.id.txtUserRequest);
-        txtStore.setText(cursor.getString(cursor.getColumnIndex(RequestData.COLUMN_STORE)));
+        String a = cursor.getString(cursor.getColumnIndex(RequestData.COLUMN_NAME));
+        txtAction.setText(a);
+        txtAction.setTypeface(tf);
 
-        TextView txtScore = (TextView) view.findViewById(R.id.txtScoreRequest);
-        txtScore.setText(Integer.toString(cursor.getInt(cursor.getColumnIndex(RequestData.COLUMN_SCORE))));
+        TextView txtNameUser = (TextView) view.findViewById(R.id.txtNameUserRequest);
+        txtNameUser.setTypeface(tf);
+
+        String name[] = (cursor.getString((cursor.getColumnIndex(RequestData.COLUMN_USER)))).split(" ", 2);
+        txtNameUser.setText(name[0] +" wants to share !");
+
 
     }
 }

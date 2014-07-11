@@ -12,6 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.internal.IGoogleMapDelegate;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -29,6 +30,8 @@ public class MyGoogleMapHelper {
 
     private MyOnClickMapListener myOnClickMapListener;
 
+    private LatLng myDummyLocation = new LatLng(51.04157350602823,3.726298436522484);
+
 
     public MyGoogleMapHelper( GoogleMap googleMap ) {
         this.googleMap = googleMap;
@@ -39,16 +42,28 @@ public class MyGoogleMapHelper {
     public void initializeMap() {
         LLOG.logg("initializeMap()");
 
+
         if (googleMap != null) {
 
             googleMap.setOnMapClickListener(new MyOnClickMapListener(googleMap));
+            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+            googleMap.getUiSettings().setCompassEnabled(false);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(false);
+            zoomMap( myDummyLocation );
             drawCircle();
-            setStaticPoints();
+            //setStaticPoints();
+
 
         } else {
             LLOG.logg("googleMap is null");
         }
 
+    }
+
+    public void resetMap () {
+        googleMap.clear();
+        drawCircle();
     }
 
     public void setLocation(Location location) {
@@ -66,11 +81,8 @@ public class MyGoogleMapHelper {
 
     public  void zoomMap(LatLng latLng) {
 
-        //location.getLatitude(), location.getLongitude()
-
-        CameraUpdate center=
-        CameraUpdateFactory.newLatLng(latLng);
-        CameraUpdate zoom=CameraUpdateFactory.zoomTo(14);
+        CameraUpdate center= CameraUpdateFactory.newLatLng(latLng);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
 
         googleMap.moveCamera(center);
         googleMap.animateCamera(zoom);
@@ -86,11 +98,19 @@ public class MyGoogleMapHelper {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(points[i]);
             markerOptions.title(fd.getStoreItemData()[i].name);
+            markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.poi_hm));
             googleMap.addMarker(markerOptions);
-
         }
 
 
+    }
+
+    public void setMarker( double lat, double lng, int imgResource, String title ) {
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(lat, lng));
+        markerOptions.title(title);
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(imgResource));
+        googleMap.addMarker(markerOptions);
     }
 
     private static class MyOnClickMapListener implements GoogleMap.OnMapClickListener {

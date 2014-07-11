@@ -17,7 +17,7 @@ public class MyQRCodeGenerator {
     private QRCodeWriter writer = new QRCodeWriter();
 
 
-    public Bitmap getQRBitmap(String qrCodeString) {
+    public Bitmap getQRBitmap(String qrCodeString, int a, int b) {
 
         try {
             BitMatrix matrix = writer.encode(qrCodeString, BarcodeFormat.QR_CODE, matrixWidth, matrixWidth);
@@ -25,9 +25,16 @@ public class MyQRCodeGenerator {
 
             for (int i = 0; i < matrixWidth; i++) {
                 for (int j = 0; j < matrixWidth; j++) {
-                    mBitmap.setPixel(i, j, matrix.get(i, j) ? R.drawable.purple: Color.WHITE);
+
+                    if (matrix.get(i, j)){
+                        mBitmap.setPixel(i, j, a);
+                    } else {
+                        mBitmap.setPixel(i, j, b);
+                    }
                 }
             }
+
+
 
             return mBitmap;
 

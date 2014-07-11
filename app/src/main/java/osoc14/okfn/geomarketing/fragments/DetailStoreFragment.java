@@ -30,6 +30,7 @@ public class DetailStoreFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private static final String ARG_COUPON_ID = "coupon_id";
 
     /**
      * Use this factory method to create a new instance of
@@ -40,10 +41,10 @@ public class DetailStoreFragment extends Fragment {
      * @return A new instance of fragment DetailCoupon.
      */
     // TODO: Rename and change types and number of parameters
-    public static DetailCouponFragment newInstance(String param1, String param2) {
-        DetailCouponFragment fragment = new DetailCouponFragment();
+    public static DetailStoreFragment newInstance(int coupon_id, String param2) {
+        DetailStoreFragment fragment = new DetailStoreFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_COUPON_ID, coupon_id);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;

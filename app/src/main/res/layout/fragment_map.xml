@@ -5,24 +5,23 @@
     tools:context=".fragments.TestFragment"
     android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <ImageButton
             android:id="@+id/testButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="knop"
-            android:onClick="onButtonPressed"/>
+            android:src="@android:drawable/star_off"
+            android:background="@drawable/beige"
+            android:layout_gravity="center"/>
 
         <Spinner
             android:id="@+id/spinner1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
@@ -30,22 +29,24 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:id="@+id/myMap"
+        android:id="@+id/myMap2"
         android:name="com.google.android.gms.maps.MapFragment" />
 -->
+
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:enabled="true"
         android:id="@+id/myMap"
         android:apiKey="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w"/>
-
 
     <ListView
         android:id="@+id/testListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:background="@drawable/purple"
+        android:divider="@drawable/beige"
+        android:dividerHeight="0.5dp"/>
 
 
 
