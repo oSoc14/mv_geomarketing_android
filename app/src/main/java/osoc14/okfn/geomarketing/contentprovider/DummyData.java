@@ -16,20 +16,31 @@ public class DummyData {
 
     public static void insertDummyData (Activity a) {
 
-        Coupon coupon1 = new Coupon("20 % korting", "Actie alleen geldig bij aankoop van 2 producten", "h&m" , "Food", R.drawable.hm , "dummy qr code", 12, R.drawable.poi_hm_s, R.drawable.poi_hm, 51.041377455114635,3.7252557277679443);
-        Coupon coupon2 = new Coupon("Alles aan halve prijs", "Actie alleen geldig bij aankoop van 2 producten", "Frituur Nadine", "Food", R.drawable.fries_action, "dummy qr code", 34, R.drawable.poi_pb_s, R.drawable.poi_pb, 51.04075809742324,3.7268670648336415);
-        Coupon coupon3 = new Coupon("Graties proevertjes", "Actie alleen geldig bij aankoop van 2 producten", "De ZuivelFabriek", "Food", R.drawable.melk, "dummy qr code", 21, R.drawable.poi_jbc_s, R.drawable.poi_jbc, 51.03956383942572,3.7260090932250023);
-        Coupon coupon4 = new Coupon("Pitta festijn", "Actie alleen geldig bij aankoop van 2 producten", "Pitta Istanbul", "Food", R.drawable.pitta,  "dummy qr code", 23, R.drawable.poi_hm_s, R.drawable.poi_hm, 51.04240386731209,3.721863068640232);
-        Coupon coupon5 = new Coupon("Zuivelweek ", "Actie alleen geldig bij aankoop van 2 producten", "De ZuivelFabriek", "Food", R.drawable.melk, "dummy qr code", 9, R.drawable.poi_pb_s, R.drawable.poi_pb, 51.04224998071354,3.7289692461490627);
-        Coupon coupon6 = new Coupon("Gratis droge worst", "Actie alleen geldig bij aankoop van 2 producten", "Slagerij bij Bart", "Food", R.drawable.butcher, "dummy qr code", 3, R.drawable.poi_jbc_s, R.drawable.poi_jbc, 51.04224998000354,3.7289692461730627);
-        Coupon coupon7 = new Coupon("5 euro korting op alle android-smartphones", "Actie geldig zolang de rode duivels winnen", "Media Markt", "Electronics", R.drawable.media, "dummy qr code", 98 ,R.drawable.poi_hm_s, R.drawable.poi_hm,51.04224998000354,3.7289692061490627);
-        Coupon coupon8 = new Coupon("AH slaatjes promotie", "-35% op alle AH maaltijdsalades", "Albert Heijn", "Varia", R.drawable.ah, "dummy qr code", 12, R.drawable.poi_pb_s, R.drawable.poi_pb, 51.04225998071354,3.7289602461490627);
-        Coupon coupon9 = new Coupon("Fanta en cola actie", "-10% op alle frisdrank petflessen van Coca-cola Company", "Colruyt", "Varia", R.drawable.pitta, "dummy qr code", 41, R.drawable.poi_jbc_s, R.drawable.poi_jbc,51.04224997071354,3.7289691461490627);
-        Coupon coupon10 = new Coupon("Aperetief van het huis bij drie gangen menu", "Alleen geldig tijdens de lunch", "Faits D'hiver", "Food", R.drawable.resto, "dummy qr code", 23, R.drawable.poi_hm_s, R.drawable.poi_hm,51.03924998071354,3.7279692461490627);
-        Coupon coupon11 = new Coupon("Gratis inkom bij het optreden van Coldplay", "Maximum 150 personen in het café", "Café de loge", "Bars", R.drawable.deloge, "dummy qr code", 19, R.drawable.poi_pb_s, R.drawable.poi_pb,51.04124998071354,3.6289692461490627);
-        Coupon coupon12 = new Coupon("Friet met mayo en frikandel aan 3 euro", "actie geldig zolang de vooraat strekt", "Frituur Nadine", "Food", R.drawable.fries_action, "dummy qr code", 25, R.drawable.poi_jbc_s, R.drawable.poi_jbc, 51.04224998071354,3.7289699461490627);
-        Coupon coupon13 = new Coupon("Meergranen brood actie ", "Elke ochtent tussen 8 en 10 uur", "Bakker Lies", "Food", R.drawable.bread, "dummy qr code", 17, R.drawable.poi_hm_s, R.drawable.poi_hm, 51.04224998000354,3.7200692461490627);
-        Coupon coupon14 = new Coupon("Badpakken promoties tot 15%", "Hoera het is zomer", "H&M", "Clothing", R.drawable.hm, "dummy qr code" , 14, R.drawable.poi_hm_s, R.drawable.poi_hm, 51.04004998071354,3.7009692461490627);
+        //Food
+        Coupon coupon1 = new Coupon("Graties aperitief", "Bij 2 gangen menu", "Bonafide", "Food", R.drawable.logo_bona, "dummy qr code", 34, R.drawable.poi_bena_s, R.drawable.poi_bena, 51.04297640529123,3.7236547842621803);
+        Coupon coupon2 = new Coupon("Frikadel special graties", "Actie vanaf groot pak friet met saus", "Stas-Dejong", "Food", R.drawable.logo_stas, "dummy qr code", 21, R.drawable.poi_stass_s, R.drawable.poi_stass, 51.040721627158064,3.7244457006454463);
+        Coupon coupon3 = new Coupon("Graties pint bij frietjes", "Actie vanaf groot pak friet met saus", "Frituur bar & café", "Food", R.drawable.logo_frit, "dummy qr code", 3, R.drawable.poi_frit_s, R.drawable.poi_frit, 51.04291506227478,3.7256483361124997);
+        Coupon coupon4 = new Coupon("Supersized bicky burger", "Bicky burgers met dubbele burger", "Funky frituur", "Food", R.drawable.logo_funk, "dummy qr code", 98 ,R.drawable.poi_funk_s, R.drawable.poi_funk,51.04077053525275,3.727819919586181);
+        Coupon coupon5 = new Coupon("Digestief van huis", "Geldig op alle gerechten", "Ravioli's", "Food", R.drawable.logo_rav, "dummy qr code", 19, R.drawable.poi_rav_s, R.drawable.poi_rav,51.04181087408855,3.729371912777424);
+        Coupon coupon6 = new Coupon("Smart lunch 10 euro", "Proef onze gezonde smart luch menu", "Bistro Smartfood", "Food", R.drawable.logo_smart, "dummy qr code", 19, R.drawable.poi_smart_s, R.drawable.poi_smart,51.038746708891274,3.7262142822146416);
+        Coupon coupon7 = new Coupon("Yellow-menu aan 12 euro", "Menu is exclusief drank", "Yellow", "Food", R.drawable.logo_yel, "dummy qr code", 19, R.drawable.poi_yel_s, R.drawable.poi_yel,51.04121154901604,3.7248969823122025);
+
+        //Bars
+
+        //Electronics
+
+        //Clothing
+        Coupon coupon8 = new Coupon("Badpakken promoties tot 15%", "Op de volledige zomer collectie", "H&M", "Clothing", R.drawable.logo_hm, "dummy qr code" , 14, R.drawable.poi_hm_s, R.drawable.poi_hm, 51.04103278294871,3.725546076893806);
+        Coupon coupon9 = new Coupon("Extra 10% op uw aankoop", "Niet geldig op lingerie artikelen", "JBC", "Clothing", R.drawable.logo_jbc, "dummy qr code", 41, R.drawable.poi_jbc_s, R.drawable.poi_jbc,51.04233366979013,3.7257636711001396);
+        Coupon coupon10 = new Coupon("Kies uw graties accesoire", "Bij aankoop vanaf 2 producten", "Pull & Bear", "Clothing", R.drawable.logo_pb, "dummy qr code", 25, R.drawable.poi_pb_s, R.drawable.poi_pb, 51.03942680873707,3.7257603183388714);
+        Coupon coupon11 = new Coupon("30% op alle winterjassen", "Niet geldig op de nieuwe collectie", "WE", "Clothing", R.drawable.logo_we, "dummy qr code", 25, R.drawable.poi_we_s, R.drawable.poi_we, 51.04024202995975,3.725617155432701);
+
+        //Varia
+        Coupon coupon12 = new Coupon("AH slaatjes promotie", "-35% op alle maaltijdsalades", "Albert Heijn" , "Varia", R.drawable.logo_ah , "dummy qr code", 12, R.drawable.poi_ah_s, R.drawable.poi_ah, 51.04264629036875,3.727906085550785);
+        Coupon coupon13 = new Coupon("Jupiler aan halve prijs", "Actie op Jupiler per bak ", "Carrefour", "Varia", R.drawable.logo_car,  "dummy qr code", 23, R.drawable.poi_car_s, R.drawable.poi_car, 51.0428421251117,3.72286219149828);
+        Coupon coupon14 = new Coupon("20% op alle aankopen", "Niet cummuleerbaar met andere acties", "Delaize", "Varia", R.drawable.logo_del, "dummy qr code", 9, R.drawable.poi_del_s, R.drawable.poi_del, 51.041748686303976,3.7239203229546547);
+        Coupon coupon15 = new Coupon("Meergranen brood actie ", "20% korting op meergranen broden", "Lidl", "Varia", R.drawable.logo_lidl, "dummy qr code", 17, R.drawable.poi_lidl_s, R.drawable.poi_lidl, 51.039584077769995,3.7243478000164036);
+
 
         a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon1.getContentValues());
         a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon2.getContentValues());
@@ -45,8 +56,11 @@ public class DummyData {
         a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon12.getContentValues());
         a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon13.getContentValues());
         a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon14.getContentValues());
+        a.getContentResolver().insert(CouponContentProvider.CONTENT_URI_ALL_COUPONS, coupon15.getContentValues());
 
     }
+
+
 
     public static void insertDummyFriends (Activity a){
 

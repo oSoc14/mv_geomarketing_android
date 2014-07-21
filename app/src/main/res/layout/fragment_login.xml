@@ -26,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText"
-            android:hint="Username"
-        />
+            android:hint="Username" />
 
         <EditText
             android:layout_width="match_parent"
@@ -35,8 +34,8 @@
             android:inputType="textPassword"
             android:hint="Password"
             android:ems="10"
-            android:id="@+id/editText2"
-        />
+            android:id="@+id/editText2" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="50dp" />

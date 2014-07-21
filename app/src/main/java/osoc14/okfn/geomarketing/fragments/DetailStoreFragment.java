@@ -8,6 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import osoc14.okfn.geomarketing.MyGoogleMapHelper;
 import osoc14.okfn.geomarketing.R;
 
 /**
@@ -32,6 +40,10 @@ public class DetailStoreFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private static final String ARG_COUPON_ID = "coupon_id";
 
+    private GoogleMap googleMap;
+    private MyGoogleMapHelper mapHelper;
+    MapView mapView;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -54,6 +66,29 @@ public class DetailStoreFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        mapView.onResume();
+        super.onResume();
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -66,7 +101,23 @@ public class DetailStoreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail_store, container, false);
+        View v = inflater.inflate(R.layout.fragment_detail_store, container, false);
+
+        // Gets the MapView from the XML layout and creates it
+        mapView = (MapView) v.findViewById(R.id.myMapStore);
+        mapView.onCreate(savedInstanceState);
+
+        MapsInitializer.initialize(getActivity());
+
+        googleMap = mapView.getMap();
+        mapHelper = new MyGoogleMapHelper(googleMap);
+        mapHelper.initializeMap();
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(new LatLng(51.04157350602823,3.726298436522484));
+        googleMap.addMarker(markerOptions);
+
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -30,7 +30,7 @@ public class MyGoogleMapHelper {
 
     private MyOnClickMapListener myOnClickMapListener;
 
-    private LatLng myDummyLocation = new LatLng(51.04157350602823,3.726298436522484);
+    private LatLng myDummyLocation = new LatLng(51.04140612497747,3.725198395550251);
 
 
     public MyGoogleMapHelper( GoogleMap googleMap ) {
@@ -51,7 +51,7 @@ public class MyGoogleMapHelper {
             googleMap.getUiSettings().setMyLocationButtonEnabled(true);
             googleMap.getUiSettings().setZoomControlsEnabled(false);
             zoomMap( myDummyLocation );
-            drawCircle();
+            //drawCircle();
             //setStaticPoints();
 
 
@@ -72,8 +72,8 @@ public class MyGoogleMapHelper {
 
     public void drawCircle() {
         final CircleOptions circleOptions = new CircleOptions();
-        circleOptions.center(new LatLng(51.04157350602823,3.726298436522484));
-        circleOptions.radius(300);
+        circleOptions.center(myDummyLocation);
+        circleOptions.radius(350);
         circleOptions.strokeColor(R.drawable.purple);
         circleOptions.fillColor(R.drawable.purple);
         final Circle circle = googleMap.addCircle(circleOptions);

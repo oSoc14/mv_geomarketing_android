@@ -1,42 +1,95 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.DetailCoupon">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp" >
-
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/fries_shop"
-            android:paddingBottom="5dp"/>
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_left"
+            android:paddingRight="@dimen/padding_right"
+            android:paddingTop="@dimen/padding_top"
+            android:paddingBottom="@dimen/padding_bottom"
+            android:background="@drawable/yellow"
+            android:layout_weight="0">
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fries_shop"
+                android:paddingBottom="5dp"
+                android:id="@+id/imageViewDetailCoupon"
+                android:paddingRight="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-        <TextView
-            android:id="@+id/txtTitleStore"
+            <TextView
+                android:id="@+id/txtTitleStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Frituur Nadine"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:paddingBottom="5dp"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageViewDetailCoupon"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <TextView
+                android:id="@+id/txtStoreDetailCoupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Beste frieten van het stad"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingBottom="5dp"
+                android:layout_toRightOf="@+id/imageViewDetailCoupon"
+                android:layout_below="@+id/txtTitleStore"
+                android:layout_toLeftOf="@+id/imageButton" />
+
+        </RelativeLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Frituur Nadine!"
-            android:textSize="40dp"
-            android:paddingBottom="5dp"/>
+            android:orientation="horizontal"
+            android:weightSum="3">
 
-        <TextView
-            android:id="@+id/txtSloganStore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Beste frieten vant stad!"
-            android:textSize="30dp"
-            android:gravity="right"
-            android:paddingBottom="5dp"/>
+            <com.google.android.gms.maps.MapView
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:enabled="true"
+                android:id="@+id/myMapStore"
+                android:apiKey="AIzaSyAg1Vf3WO0yqJj4gMsAUSzsQNl7XRPCo9w"
+                android:layout_weight="2"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/txtStoreStreet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AvekapelleStraat 6"
+                    android:paddingBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/txtStoreCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="8630 Veurne"
+                    android:paddingBottom="5dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtSummaryDetailCoupon"
@@ -45,9 +98,4 @@
             android:text="Basically, Dao argues that FILL_PARENT is a clunkier version of MATCH_PARENT used for the same purposes, but with more room for confusion, because FILL_PARENT doesn't actually do what its name implies. On top of that, FILL_PARENT is deprecated, so at some point it will no longer be supported. According to Dao, the reason both exist is a kind of ineffective attempt at clearing up developer confusing"
             android:paddingBottom="5dp"/>
 
-
-
-    </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

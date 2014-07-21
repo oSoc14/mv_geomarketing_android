@@ -163,6 +163,7 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         googleMap = mapView.getMap();
         mapHelper = new MyGoogleMapHelper(googleMap);
         mapHelper.initializeMap();
+        mapHelper.drawCircle();
         mapHelper.setStaticPoints();
 
 
@@ -179,8 +180,8 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         List<String> list = new ArrayList<String>();
         list.add("All");
         list.add("Food");
-        list.add("Bars");
-        list.add("Electronics");
+        //list.add("Bars");
+        //list.add("Electronics");
         list.add("Varia");
         list.add("Clothing");
 
