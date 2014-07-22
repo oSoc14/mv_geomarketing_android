@@ -25,6 +25,8 @@ public class CouponContentProvider extends ContentProvider{
 
     public static final Uri CONTENT_URI_COUPONS_BY_CATEGORY = Uri.parse("content://" + PROVIDER_NAME + "/category/id");
 
+    public static final Uri CONTENT_URI_FAVORITE_STORES = Uri.parse("content://" + PROVIDER_NAME + "/favstores");
+
 
     private static final int TYPE_ALL_COUPONS = 1;
     private static final int TYPE_ONE_COUPON = 2;
@@ -38,6 +40,8 @@ public class CouponContentProvider extends ContentProvider{
 
     private static final int TYPE_ALL_COUPONS_BY_CATEGORY = 7;
 
+    private static final int TYPE_ALL_FAVORITE_STORES = 8;
+
     private static final UriMatcher uriMatcher;
     static
     {
@@ -50,6 +54,7 @@ public class CouponContentProvider extends ContentProvider{
         uriMatcher.addURI(PROVIDER_NAME, "activities", TYPE_ALL_ACTIVITIES);
         uriMatcher.addURI(PROVIDER_NAME, "requests", TYPE_ALL_REQUESTS);
         uriMatcher.addURI(PROVIDER_NAME, "category/id/*", TYPE_ALL_COUPONS_BY_CATEGORY);
+        uriMatcher.addURI(PROVIDER_NAME, "favstores", TYPE_ALL_FAVORITE_STORES);
 
     }
 
@@ -169,6 +174,14 @@ public class CouponContentProvider extends ContentProvider{
             case TYPE_ALL_REQUESTS:
                 tableName = RequestData.TABLE_NAME;
                 break;
+
+            case TYPE_ALL_FAVORITE_STORES:
+                tableName = CouponData.TABLE_NAME;
+
+                selection = CouponData.COLUMN_FAV + "=1";
+
+                break;
+
 
             default:
                 return null;

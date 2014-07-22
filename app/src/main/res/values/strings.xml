@@ -14,5 +14,6 @@
     <string name="title_fragment_profile">Profile</string>
     <string name="title_fragment_friends">Friends</string>
     <string name="title_fragment_request">Request</string>
+    <string name="favorite_stores">Favorite stores</string>
 
 </resources>

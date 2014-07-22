@@ -24,13 +24,14 @@ public class Coupon {
     int points;
     double lat;
     double lng;
+    int fav;
 
 
 
     public Coupon() {
     }
 
-    public Coupon(String name, String summary, String store, String category, int imageRes, String qrCode, int points, int imageMarker_s, int imageMarker_u, double lat, double lng) {
+    public Coupon(String name, String summary, String store, String category, int imageRes, String qrCode, int points, int imageMarker_s, int imageMarker_u, double lat, double lng, int fav) {
         this.name = name;
         this.summary = summary;
         this.store = store;
@@ -42,6 +43,7 @@ public class Coupon {
         this.imageMarker_u = imageMarker_u;
         this.lat = lat;
         this.lng = lng;
+        this.fav = fav;
 
     }
 
@@ -59,6 +61,7 @@ public class Coupon {
         v.put(CouponData.COLUMN_IMAGE_MARKER_U, imageMarker_u);
         v.put(CouponData.COLUMN_LAT, lat);
         v.put(CouponData.COLUMN_LNG, lng);
+        v.put(CouponData.COLUMN_FAV, fav);
 
         return v;
     }
@@ -78,8 +81,9 @@ public class Coupon {
         int points = c.getInt(c.getColumnIndex(CouponData.COLUMN_POINTS));
         double lat = c.getDouble(c.getColumnIndex(CouponData.COLUMN_LAT));
         double lng = c.getDouble(c.getColumnIndex(CouponData.COLUMN_LNG));
+        int fav = c.getInt(c.getColumnIndex(CouponData.COLUMN_FAV));
 
-        return new Coupon(name, summary, store, category, imageRes, qrCode, points, imageMarker_s, imageMarker_u, lat, lng);
+        return new Coupon(name, summary, store, category, imageRes, qrCode, points, imageMarker_s, imageMarker_u, lat, lng, fav);
     }
 
     public String getName() {
@@ -124,5 +128,9 @@ public class Coupon {
 
     public double getLng() {
         return lng;
+    }
+
+    public int getFav() {
+        return fav;
     }
 }

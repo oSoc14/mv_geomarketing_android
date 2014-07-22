@@ -127,7 +127,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
         if ( c.moveToFirst() ) {
 
             txtView.setText(c.getString(c.getColumnIndex(FriendsData.COLUMN_NAME)));
-            imgView.setImageResource(c.getInt(c.getColumnIndex(FriendsData.COLUMN_IMAGE_RES)));
+            imgView.setImageResource(R.drawable.pic_profile);
             //txtViewScore.setText(Integer.toString(c.getInt(c.getColumnIndex(FriendsData.COLUMN_SCORE)))+" points");
 
         }
@@ -183,7 +183,7 @@ public class ProfileFragment extends Fragment implements LoaderManager.LoaderCal
                 Log.d("data", ">>>>> onCreateLoader");
                 //final Uri uri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ALL_COUPONS, null);
                 //final Uri uri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ALL_COUPONS, null);
-                return new CursorLoader(getActivity(), CouponContentProvider.CONTENT_URI_ALL_COUPONS, null, null, null, null);
+                return new CursorLoader(getActivity(), CouponContentProvider.CONTENT_URI_FAVORITE_STORES, null, null, null, null);
 
 
             default:

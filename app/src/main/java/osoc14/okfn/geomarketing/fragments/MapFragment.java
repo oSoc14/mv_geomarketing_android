@@ -185,7 +185,7 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         list.add("Varia");
         list.add("Clothing");
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
+        final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (getActivity(), android.R.layout.simple_spinner_item,list);
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
@@ -193,7 +193,7 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), spinner1.getSelectedItem().toString() + " selected", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), spinner1.getSelectedItem().toString() + " selected", Toast.LENGTH_SHORT).show();
                 currentCategory = spinner1.getSelectedItem().toString();
                 restartLoader();
             }
@@ -245,7 +245,7 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
         {
             case LOADER_COUPON:
                 //final Uri uri = Uri.withAppendedPath(CouponContentProvider.CONTENT_URI_ALL_COUPONS, null);
-                if (currentCategory == "All") {
+                if (currentCategory.equals("All")) {
                     final Uri uri = CouponContentProvider.CONTENT_URI_ALL_COUPONS;
                     return new CursorLoader(getActivity(), uri, null, null, null, null);
                 } else {
@@ -266,8 +266,17 @@ public class MapFragment extends Fragment implements LoaderManager.LoaderCallbac
             case LOADER_COUPON:
                 if(!cursor.isClosed() && cursor.moveToFirst())
                 {
-                    //adapter.swapCursor(cursor);
                     myAdaptor.swapCursor(cursor);
+                    do
+                    {
+                        double lat = cursor.getDouble(cursor.getColumnIndex(CouponData.COLUMN_LAT));
+                        double lng = cursor.getDouble(cursor.getColumnIndex(CouponData.COLUMN_LNG));
+                        int img = cursor.getInt(cursor.getColumnIndex(CouponData.COLUMN_IMAGE_MARKER_U));
+                        String title = cursor.getString(cursor.getColumnIndex(CouponData.COLUMN_STORE));
+                        mapHelper.setMarker(lat, lng, img, title);
+
+                    } while (cursor.moveToNext());
+
 
                 }
                 break;

@@ -62,11 +62,9 @@
                 android:text="165 points"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:paddingBottom="5dp"
-                android:layout_alignTop="@+id/txtStoreDetailCoupon"
-                android:layout_alignLeft="@+id/txtNameAccount"
-                android:layout_alignStart="@+id/txtNameAccount"
-                android:layout_marginLeft="85dp"
-                android:gravity="right" />
+                android:layout_below="@+id/txtStoreDetailCoupon"
+                android:layout_toRightOf="@+id/profilePictureAccount"
+                android:layout_toEndOf="@+id/profilePictureAccount" />
 
 
         </RelativeLayout>
@@ -110,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtTitleAccountFavoriteStores"
-                android:text="Favorite stores"
+                android:text="@string/favorite_stores"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@drawable/beige"
                 android:paddingLeft="@dimen/padding_left"

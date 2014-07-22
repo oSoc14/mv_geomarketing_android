@@ -61,6 +61,26 @@ public class MyGoogleMapHelper {
 
     }
 
+    public  void initializeMapTwo() {
+        LLOG.logg("initializeMap()");
+
+
+        if (googleMap != null) {
+
+            googleMap.setOnMapClickListener(new MyOnClickMapListener(googleMap));
+            googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+            googleMap.getUiSettings().setCompassEnabled(false);
+            googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            googleMap.getUiSettings().setZoomControlsEnabled(false);
+
+
+
+        } else {
+            LLOG.logg("googleMap is null");
+        }
+
+    }
+
     public void resetMap () {
         googleMap.clear();
         drawCircle();
