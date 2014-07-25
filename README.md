@@ -16,8 +16,10 @@ QR-code library ZXing is needed
 As it is a concept app, the focus is on how the user interact with the app. So the data stored in the local SQLite database is staticaly imported.
 
 ###Links
-
+Project pitch slides:
 http://www.slideshare.net/samuelvandecasteele/kupon-37317296
+
+Information blog:
 http://blog.summerofcode.be/2014/07/24/start-game-kupon/
 
 Twitter @Samuel_vdc
