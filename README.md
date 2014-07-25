@@ -19,6 +19,7 @@ As it is a concept app, the focus is on how the user interact with the app. So t
 
 http://www.slideshare.net/samuelvandecasteele/kupon-37317296
 http://blog.summerofcode.be/2014/07/24/start-game-kupon/
+
 Twitter @Samuel_vdc
 
 
